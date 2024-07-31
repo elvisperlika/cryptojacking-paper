@@ -1,10 +1,10 @@
 # Fdb version 3
-["xdvipdfmx"] 1722447335 "main.xdv" "main.pdf" "main" 1722447337
-  "main.xdv" 1722447335 104116 3d59bd36591f2d79ca9d7ae3e54b89d2 "xelatex"
+["xdvipdfmx"] 1722448326 "main.xdv" "main.pdf" "main" 1722448327
+  "main.xdv" 1722448326 104224 d178619bdcfd4583443ada9d03fab8b7 "xelatex"
   (generated)
   "main.pdf"
-["xelatex"] 1722447334 "/Users/elvisperlika/UNI/CRITTOGRAFIA/Relazione Crittografia/main.tex" "main.xdv" "main" 1722447337
-  "/Users/elvisperlika/UNI/CRITTOGRAFIA/Relazione Crittografia/main.tex" 1722447334 10163 ed2129a5a2759482b6b29846b11eb4c8 ""
+["xelatex"] 1722448325 "/Users/elvisperlika/UNI/CRITTOGRAFIA/Relazione Crittografia/main.tex" "main.xdv" "main" 1722448327
+  "/Users/elvisperlika/UNI/CRITTOGRAFIA/Relazione Crittografia/main.tex" 1722448323 10196 5dea50a555ac5a8ac00e84dae716260a ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1136768653 1524 4414a8315f39513458b80dfc63bff03a ""
@@ -58,7 +58,11 @@
   "/usr/local/texlive/2022/texmf-dist/tex/latex/base/ts1cmr.fd" 1622581934 2430 06a89bcded389391906798ea7a3f3aaa ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/base/ulasy.fd" 1622581934 2233 fb041045cf7e676975d0d6824c7a540e ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/etoolbox/etoolbox.sty" 1601931149 46845 3b58f70c6e861a13d927bff09d35ecbc ""
+  "/usr/local/texlive/2022/texmf-dist/tex/latex/graphics-cfg/graphics.cfg" 1465944070 1224 978390e9c2234eab29404bc21b268d1e ""
+  "/usr/local/texlive/2022/texmf-dist/tex/latex/graphics-def/xetex.def" 1616189247 15263 06bfc49e20bdfcb827e011063ecb4ae6 ""
+  "/usr/local/texlive/2022/texmf-dist/tex/latex/graphics/graphics.sty" 1622581934 18399 7e40f80366dffb22c0e7b70517db5cb4 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/graphics/keyval.sty" 1622581934 2671 4de6781a30211fe0ea4c672e4a2a8166 ""
+  "/usr/local/texlive/2022/texmf-dist/tex/latex/graphics/trig.sty" 1636758526 4009 187ea2dc3194cd5a76cd99a8d7a6c4d0 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/hycolor/hycolor.sty" 1580250785 17914 4c28a13fc3d975e6e81c9bea1d697276 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/hxetex.def" 1645564115 45016 0a35faa45750bcb80114f8df2443e9c1 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/hyperref.sty" 1645564115 220999 6145ea83914c186e178d1d31c50b37df ""
@@ -75,10 +79,10 @@
   "/usr/local/texlive/2022/texmf-dist/web2c/texmf.cnf" 1646502317 40171 cdab547de63d26590bebb3baff566530 ""
   "/usr/local/texlive/2022/texmf-var/web2c/xetex/xelatex.fmt" 1671542982 5419897 49a3a1fa958fc326394a08a0572ff40f ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "main.aux" 1722447335 2561 ed11f5d71e11703f318e4cf77950d11e "xelatex"
-  "main.out" 1722447335 2102 21d2721989888a8db33ca5a7c90e1520 "xelatex"
-  "main.tex" 1722447334 10163 ed2129a5a2759482b6b29846b11eb4c8 ""
-  "main.toc" 1722447335 1125 5e2fad6c2cd76b12b09e7e2c31b0a4be "xelatex"
+  "main.aux" 1722448326 2561 ed11f5d71e11703f318e4cf77950d11e "xelatex"
+  "main.out" 1722448326 2102 21d2721989888a8db33ca5a7c90e1520 "xelatex"
+  "main.tex" 1722448323 10196 5dea50a555ac5a8ac00e84dae716260a ""
+  "main.toc" 1722448326 1125 5e2fad6c2cd76b12b09e7e2c31b0a4be "xelatex"
   (generated)
   "main.aux"
   "main.log"
