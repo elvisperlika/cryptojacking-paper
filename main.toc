@@ -1,0 +1,15 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {section}{\numberline {1}Introduzione}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Definizione}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Storia}{2}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Come funziona}{3}{section.2}%
+\contentsline {section}{\numberline {3}Metodi di attacco}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Attaccare diretamente i Personal Computer}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Cercare server e dispositivi di rete vulnerabili}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Attaccare il sistema di produzione di software}{4}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Fare leva sulle infrastrutture cloud}{4}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Aspetti tecnici}{5}{section.4}%
+\contentsline {section}{\numberline {5}Popolarità}{5}{section.5}%
+\contentsline {section}{\numberline {6}Prevenire}{5}{section.6}%
+\contentsline {section}{\numberline {7}Bibliografia}{5}{section.7}%
