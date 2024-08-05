@@ -6,6 +6,7 @@
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{mathtools}
+\usepackage{amssymb}
 
 \textwidth=450pt\oddsidemargin=0pt
 \begin{document}
@@ -102,6 +103,8 @@ che andava a utilizzare parte o tutta la potenza di calcolo per minare
 criptovalute Monero (approfondimento nella sezione
 \hyperref[sec:aspetti_tecnici]{"Aspetti Tecnici"}). 
 
+\newpage
+
 \section{Come funziona}
 Il mining, cioè il processo che Bitcoin e altre cripto valute utilizzano per
 coniare virtualmente nuove monete digitali e certificare le transazioni, usando
@@ -124,6 +127,8 @@ Il cryptojacking sfrutta questo processo, ma in modo illecito. Gli hacker
 inseriscono codice malevolo nei siti web o nei messaggi di posta elettronica che
 infettano i computer delle vittime e li trasformano in macchine per il mining
 riducendo i costi e aumentando i guadagni.
+
+\newpage
 
 \section{Metodi di attacco}
 I metodi per attaccare un sistema con il cryptojacking sono molteplici e variano
@@ -165,8 +170,6 @@ mining all'interno della macchina usando tecniche come:
         sscarica alcun codice nel dispositivo.
 \end{itemize}
 
-
-
 \subsection{Cercare server e dispositivi di rete vulnerabili}
 I server sono un obbiettivo molto ambito per gli hacker, in quanto sono
 dispositivi molto potenti e spesso connessi a Internet 24/7. Gli hacker possono
@@ -204,11 +207,13 @@ attacchi più redditizi. \\
 L'aspetto rilevante, in tutti gli approcci sopra citati, è che gli hacker
 possano accedere a quante più macchine computazionali.
 
-\section{Aspetti tecnici di Monero}\label{sec:aspetti_tecnici} 
-Non è obbiettivo di questo paper approfondire il tema delle criptovalute in
-senso generale ma si vuole trattare il tema del mining in modo più specifico.
-Nella seguente sezione si andrà ad analizzare il mining di Monero, una delle
-criptovalute più utilizzate per il cryptojacking.
+\newpage 
+
+\section{Aspetti tecnici di Monero}\label{sec:aspetti_tecnici} Non è obbiettivo
+di questo paper approfondire il tema delle criptovalute in senso generale ma si
+vuole trattare il tema del mining in modo più specifico. Nella seguente sezione
+si andrà ad analizzare il mining di Monero, una delle criptovalute più
+utilizzate per il cryptojacking.
 
 La criptovaluta Monero, inizialmente nota come BitMonero, è stata creata
 nell'aprile 2014 come deriva della valuta proof-of-concept CryptoNote. Monero
@@ -268,10 +273,10 @@ in cui $ a $ e $ b $ sono i parametri della curva che ne defiscono la forma e la
 posizione. Le coordinate $ (x,y) $ sulla curva ellittica che possono prendere
 qualsiasi valore all'interno di $F_p$ formano un Gruppo Abeliano \footnote{Un
 gruppo abeliano è un gruppo in cui l'operazione beneficia della proprietà
-commutativa È anche detto: Gruppo Commutativo}.
-Questo particolare gruppo ci permette, scegliamo 2 punti $ P $ e $ Q $ sulla curva che 
-useremo per risolvere $ R $ andando a eseguire l'operazione di somma $ P + Q = R $ 
-con $ R $ che sarà un altro punto sulla curva.
+commutativa È anche detto: Gruppo Commutativo}. Questo particolare gruppo ci
+permette, scegliamo 2 punti $ P $ e $ Q $ sulla curva che useremo per risolvere
+$ R $ andando a eseguire l'operazione di somma $ P + Q = R $ con $ R $ che sarà
+un altro punto sulla curva.
 
 Prendiamo gli scalari $p, q$ valori interi random di grandezza $n$ tali che $ p,
 q \in {o,1}^n $.
@@ -279,14 +284,102 @@ q \in {o,1}^n $.
 Il Standards for Efficient Cryptography (SEC) è un set di curve ellittiche
 proposte per l'uso nel campo della crittografia. Una delle più note e utilizzate
 è la \textbf{Secp256k1} definita dalla equazione
-$$ y^2 = x^3 + 7 \mod{p} $$ 
-dove 
-$$ p = 2^{256} - 2^{32} \underbrace{- 2^9 - 2^8 - 2^7 - 2^6 - 2^4 - 1}_{-977} $$.
+$$ y^2 = x^3 + 7 \mod{p} $$ dove 
+$$ p = 2^{256} - 2^{32} \underbrace{- 2^9 - 2^8 - 2^7 - 2^6 - 2^4 - 1}_{-977}
+$$.
 
 Questa curva è la base per la crittografia di Bitcoin e altre criptovalute.
-Questa funzione possiede diverse qualità tali che è stata applicata, non solo 
-nel abito delle criptovalute, ma anche in altri campi per rendere le commuicazione
-sicure. 
+Questa funzione possiede diverse qualità tali che è stata applicata, non solo
+nel abito delle criptovalute, ma anche in altri campi per rendere le
+commuicazione sicure; come quello del IoT. 
+
+\subsection{Scambio di chiavi Diffie-Hellman con curve ellittiche}
+Il protocollo di scambio di chiavi Diffie-Hellman (DH), inventato nel 1976, nato
+dalla collaborazione dei ricercatori Whitfield Diffie e Martin Hellman, è il
+primo protocollo a permetter a 2 parti di communicare attraverso un canale
+insicuro senza necessità di condiversi una chiave segreta previa commuicazione.
+Vennero così introdotti i cifrari a chaive pubblica. Matematicamente, il
+protocollo DH si basa sul problema della fattorizzazione e sul problema del
+logaritmo discreto nell'algebra modulare.
+
+Un classico scambio di segreti tra Bob e Alice, utilizzando le curve ellittiche,
+avviene nel seguente modo:
+
+\begin{enumerate}
+    \item Alice e Bob generano le proprie chiavi pubbliche e private $ (p_A,
+    S_A) $ e $ (p_B, S_B) $ rispettivamente. Entrambi condividono le proprie
+    chiavi pubbliche ma non quelle private.\footnote{Leggenda:
+    \begin{itemize}
+        \item $ p $: \textbf{p}rivate key
+        \item $ S $: \textbf{S}hared key \end{itemize}}
+    \item Assumendo
+        $$ X = p_A \cdot S_B = p_A \cdot p_B \cdot G = p_B \cdot p_A \cdot G =
+        p_A \cdot S_A $$
+
+        Alice e Bob dovranno calcolarsi, privatamente: $ X = p_A \cdot S_B $ e $ X =
+        p_B \cdot S_A $. Queste saranno le chiavi condivise.
+
+        Un osservatore esterno non riuscirà a calcolare $ S $, cioè il segreto, in
+        modo semplice proprio a causa del problema di Diffie-Hellman. Infatti
+        trovare $ S $ a partire da $ S_A $ e $ S_B $ è un problema
+        computazionalmente estremamente difficile.
+\end{enumerate}
+
+\subsection{Firmare un messagio}
+
+Definiamo il 'messagio' con la lettera $ m $ e andiamo a vedere le lo schema per
+firmare un messagio, questo ci sarà utili per quando tratteremo le Ring
+Signature (tradotte: Firme ad Anello). Il seguente schema deriva dello schema di
+Schnorr Signature \footnote{Si tratta di un protocollo di autenticazione nato nel 1989 dalle mente 
+di Clauss Schnorr e poi generalizzato da Maurer nel 2009.
+Questo protoccolo permette di dimostrare ad una delle 2 parti in comunicazione 
+che conosce la chiave privata relativa a quella pubblica senza rivelarla.}.
+
+\subsubsection*{Firma}
+Alice ha le sue chiavi $ (p_A, S_A) $ e vuole firmare un messaggio $ m $, per farlo 
+deve:
+\begin{enumerate}
+    \item generare un rumero random $ r \in \mathbb{R} \cap \mathbb{Z}_l
+    $, per $ \mathbb{Z}_l $ si intendono i valori $ mod l $.
+    \item crea il messaggio criptato usando una funzione di hash sicura $ c =
+    \mathcal{H}(m, [r \cdot G]) $
+    \item definisce una risposta $ a = r - c \cdot p_A $
+    \item pubblica la firma $ (c, a) $
+\end{enumerate}
+
+\subsubsection*{Verifica}
+
+Ora Bob vuole verificare la firma di Alice, per farlo deve:
+
+\begin{enumerate}
+    \item calcolare $ c' = \mathcal{H}([r \cdot G]) $
+    \item calcolare $ A = a \cdot G $ e $ A' = r \cdot G + c' \cdot S $
+    \item se $ A = A' $ allora la firma è valida e possiamo ricavare $ p_A $
+\end{enumerate}
+
+\subsubsection*{Dimostrazione}
+
+\begin{align*}
+    a\cdot G &= (r - c \cdot p_A) G \\
+    &= r\cdot G - c \cdot S_A\\
+    r\cdot G &= a\cdot G + c\cdot S_A\\
+    \mathcal{H}_n(m, [r\cdot G]) &= \mathcal{H}_n(m, [a\cdot G + c\cdot S_A])\\
+    c = c'   
+\end{align*}
+
+Alice crea la firma $ (c, a) $ per il messaggio $ m $ e anche se qualche osservatore
+esterno riuscisse a vedere la firma $ (c, a) $ per lui sarebbe difficile
+risalire al messaggio senza la chaive privata $ p_A $.
+
+È essenziale che il sistema incaricato dell'elaborazione di tali calcoli
+disponga di adeguata potenza computazionale e capacità di memoria. 
+
+\subsection{MLSAG}
+
+Se si vuole aumentare la complessità della firma, si possono usare sistemi 
+più complessi di Schnorr o simili. Tra i diversi troviamo MLSAG \footnote{Multi Layer
+Signature} che è fondamentale nella blockchain di Monero.
+
 
 \subsection{Privacy}
 
@@ -303,6 +396,7 @@ attraverso la risoluzione di calcoli complessi (mining).} supportata da un
 \textbf{Privacy-enhancing technologies} sofisticato, il quale derivava da
 CryptoNight. Al fine di fornire privacy e anonimato, Monero, si basa su due
 concetti importanti: Stealth Address e Ring Signature.
+
 \subsubsection{Stealth Address}
     In un sistema distribuito, chiunque può vedere le transizioni, la data,
     l'importo ed i portafogli o le entità coinvolte. Monero, per impedirlo,
@@ -371,11 +465,11 @@ concetti importanti: Stealth Address e Ring Signature.
         \includegraphics[width=0.95\textwidth]{./images/sommario.png}
         \caption{Sommario dei lavori di ricerca sulle Stealth Address e compatibilità BaseSAP}
         \label{fig:summary}
-    \end{figure}
-
-
+    \end{figure}l
 
 \subsubsection{Ring Signature}
+
+\newpage 
 
 \section{Popolarità}
 La popolarità è dovuta al potenziale guadagno, guadagno molto facile da crearsi
@@ -384,9 +478,15 @@ di altri in modo gratuito. Così, anche considerando la volatilità delle cripto
 valute, esempio principe BitCoin, i margini di guadagno sono abbastanza alti da
 rendere il crimine un vero e proprio business. 
 
+\newpage
+
 \section{Prevenire e individuare}
 
+\newpage
+
 \section{Casi reali}
+
+\newpage
 
 \section{Bibliografia}
 \begin{thebibliography}{9}
@@ -423,6 +523,9 @@ Blockchains}, JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021, pp. 1�
 Koe, Kurt M. Alonso, Sarang Noether, \textit{A technical guide to a private
 digital currency; for beginners, amateurs, and experts} April 4, 2020 (v2.0.0)
 
+\bibitem{Margara}
+Margara Luciano, \textit{Diffie Hellman, Crittografia su Curve Ellittiche} A.A.
+2023-2024
 
 \end{thebibliography}
 
