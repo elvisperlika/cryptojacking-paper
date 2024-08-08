@@ -103,6 +103,18 @@ che andava a utilizzare parte o tutta la potenza di calcolo per minare
 criptovalute Monero (approfondimento nella sezione
 \hyperref[sec:aspetti_tecnici]{"Aspetti Tecnici"}). 
 
+\subsection{Struttura del documento}
+Fornisci una panoramica della struttura del documento, indicando brevemente cosa
+verrà trattato nelle diverse sezioni.
+
+\subsection{Importanza}
+Spiega perché l'argomento è rilevante o significativo. Questo aiuta a
+contestualizzare la tua discussione e a motivare l'interesse del lettore.
+
+\subsection{Problema e Motivazione}
+Identifica il problema specifico che il tuo documento cerca di risolvere e
+spiega perché è importante affrontarlo.
+
 \newpage
 
 \section{Come funziona}
@@ -291,16 +303,21 @@ $$.
 Questa curva è la base per la crittografia di Bitcoin e altre criptovalute.
 Questa funzione possiede diverse qualità tali che è stata applicata, non solo
 nel abito delle criptovalute, ma anche in altri campi per rendere le
-commuicazione sicure; come quello del IoT. 
+commuicazione sicure; come quello del IoT. Monero, invece, utilizza la curva
+Ed25519, di cui parleremo più avanti.
 
 \subsection{Scambio di chiavi Diffie-Hellman con curve ellittiche}
 Il protocollo di scambio di chiavi Diffie-Hellman (DH), inventato nel 1976, nato
 dalla collaborazione dei ricercatori Whitfield Diffie e Martin Hellman, è il
-primo protocollo a permetter a 2 parti di communicare attraverso un canale
+primo protocollo a permettere a 2 parti di communicare attraverso un canale
 insicuro senza necessità di condiversi una chiave segreta previa commuicazione.
 Vennero così introdotti i cifrari a chaive pubblica. Matematicamente, il
 protocollo DH si basa sul problema della fattorizzazione e sul problema del
 logaritmo discreto nell'algebra modulare.
+
+Definiamo $ p $ un numero reale random tale che $0 < k < l$ che chiameremo
+\textit{private key} e calcoliamo la relativa \textit{public key} $ P = k \cdot
+G $ dove $ G $ è il generatore del gruppo abeliano in questione.
 
 Un classico scambio di segreti tra Bob e Alice, utilizzando le curve ellittiche,
 avviene nel seguente modo:
@@ -308,80 +325,126 @@ avviene nel seguente modo:
 \begin{enumerate}
     \item Alice e Bob generano le proprie chiavi pubbliche e private $ (p_A,
     S_A) $ e $ (p_B, S_B) $ rispettivamente. Entrambi condividono le proprie
-    chiavi pubbliche ma non quelle private.\footnote{Leggenda:
-    \begin{itemize}
-        \item $ p $: \textbf{p}rivate key
-        \item $ S $: \textbf{S}hared key \end{itemize}}
+    chiavi pubbliche ma non quelle private.
     \item Assumendo
         $$ X = p_A \cdot S_B = p_A \cdot p_B \cdot G = p_B \cdot p_A \cdot G =
         p_A \cdot S_A $$
 
-        Alice e Bob dovranno calcolarsi, privatamente: $ X = p_A \cdot S_B $ e $ X =
-        p_B \cdot S_A $. Queste saranno le chiavi condivise.
+        Alice e Bob dovranno calcolarsi, privatamente: $ X = p_A \cdot S_B $ e $
+        X = p_B \cdot S_A $. Queste saranno le chiavi condivise.
 
-        Un osservatore esterno non riuscirà a calcolare $ S $, cioè il segreto, in
-        modo semplice proprio a causa del problema di Diffie-Hellman. Infatti
+        Un osservatore esterno non riuscirà a calcolare $ S $, cioè il segreto,
+        in modo semplice proprio a causa del problema di Diffie-Hellman. Infatti
         trovare $ S $ a partire da $ S_A $ e $ S_B $ è un problema
         computazionalmente estremamente difficile.
 \end{enumerate}
 
-\subsection{Firmare un messagio}
+\subsection{Shnorr Signature}
+In crittografia, per Shnorr Signature si intende l'algoritmo di firma digitale
+ideato da Clauss Schnorr nel 1989. È uno dei primi protocolli basati sulla
+\textbf{impraticibiltà} nel risolvere il problema del logaritmo discreto, la sua
+funzione è permette di dimostrare ad una delle 2 parti in comunicazione di
+conoscere la chiave privata relativa a quella pubblica senza rivelare, appunto,
+quella privata. Questo algoritmo ci sarà utile per quando tratteremo le Ring
+Signature (tradotte: Firme ad Anello).
 
-Definiamo il 'messagio' con la lettera $ m $ e andiamo a vedere le lo schema per
-firmare un messagio, questo ci sarà utili per quando tratteremo le Ring
-Signature (tradotte: Firme ad Anello). Il seguente schema deriva dello schema di
-Schnorr Signature \footnote{Si tratta di un protocollo di autenticazione nato nel 1989 dalle mente 
-di Clauss Schnorr e poi generalizzato da Maurer nel 2009.
-Questo protoccolo permette di dimostrare ad una delle 2 parti in comunicazione 
-che conosce la chiave privata relativa a quella pubblica senza rivelarla.}.
+\subsubsection*{Algoritmo}
 
-\subsubsection*{Firma}
-Alice ha le sue chiavi $ (p_A, S_A) $ e vuole firmare un messaggio $ m $, per farlo 
-deve:
+È fondamentale che tutti gli utenti della commuicazione concordino sul gruppo
+abeliano $ G $, di ordine $ q $, generato da $ g $ e per assunzione in questo
+gruppo il problema del logaritmo discreto sia molto difficile. Oltre al gruppo
+devono conconrdare anche su una funzione di hash sicura $ H:\{0,1\}^*
+\rightarrow \mathbb{Z} / q\mathbb{Z} $.
+
+\paragraph{Generazione delle chiavi}
+Si sceglie una chiave privata $ p \in \mathbb{Z}_q $ e si calcola la chiave
+pubblica $ S = g^{-p} $.
+
+\paragraph{Firma}
+Per firmare un messaggio $ m $ si procede nel seguente modo:
 \begin{enumerate}
-    \item generare un rumero random $ r \in \mathbb{R} \cap \mathbb{Z}_l
-    $, per $ \mathbb{Z}_l $ si intendono i valori $ mod l $.
-    \item crea il messaggio criptato usando una funzione di hash sicura $ c =
-    \mathcal{H}(m, [r \cdot G]) $
-    \item definisce una risposta $ a = r - c \cdot p_A $
-    \item pubblica la firma $ (c, a) $
+    \item si genera un numero reale random $ k \in \mathbb{Z}_q $
+    \item si calcola $ x = g^k $ con $ x \in G $ 
+    \item si calcola $ r = H(x || m) $ dove $ || $ rappresenta la concatenazione
+    in stinghe di bit
+    \item si calcola $ c = k + p \cdot r $ con $ e \in \mathbb{Z}_q $
 \end{enumerate}
 
-\subsubsection*{Verifica}
+Abbiamo, così, creato la firma $ (c, r) $ per il messaggio $ m $. Chiameremo $ c
+$ la 'challenge' e $ r $ la 'response'.
 
-Ora Bob vuole verificare la firma di Alice, per farlo deve:
-
+\paragraph{Verifica}
+Per verificare la firma $ (c, r) $ si procede nel seguente modo:
 \begin{enumerate}
-    \item calcolare $ c' = \mathcal{H}([r \cdot G]) $
-    \item calcolare $ A = a \cdot G $ e $ A' = r \cdot G + c' \cdot S $
-    \item se $ A = A' $ allora la firma è valida e possiamo ricavare $ p_A $
+    \item si calcola $ x_v = g^c\cdot y^r $
+    \item si calcola $ r_v = H(x_v || m) $
 \end{enumerate}
+Se $ r_v = r $ allora la firma è valida.
 
-\subsubsection*{Dimostrazione}
+\paragraph{Dimostrazione}
+$$ x_v = g^c\cdot y^r = g^{k + p\cdot r}\cdot g^{-p\cdot r} = g^k = x $$ ed in
+seguito:
+$$ r_v = H(x_v || m) = H(x || m) = r $$ quindi il messaggio firmato corrisponde
+a quello verificato.
 
-\begin{align*}
-    a\cdot G &= (r - c \cdot p_A) G \\
-    &= r\cdot G - c \cdot S_A\\
-    r\cdot G &= a\cdot G + c\cdot S_A\\
-    \mathcal{H}_n(m, [r\cdot G]) &= \mathcal{H}_n(m, [a\cdot G + c\cdot S_A])\\
-    c = c'   
-\end{align*}
+Anche se un intruso, senza conoscere la chiave privata, avesse creato la firma
+(c, r) sarebbe stato trascurabile, quindi un verificatore può essere sicuro che
+il messaggio non sia stato manomesso.
 
-Alice crea la firma $ (c, a) $ per il messaggio $ m $ e anche se qualche osservatore
-esterno riuscisse a vedere la firma $ (c, a) $ per lui sarebbe difficile
-risalire al messaggio senza la chaive privata $ p_A $.
+\subsection{Curva Ellittica Ed25519}
+Ed25519 è una particolare \textit{Twisted Edwards elliptic curve} che utilizza
+Monero per le operazioni crittografiche. La curva è definita dal campo $
+F_{2^{255} - 19} $ e dalla curva ellittica:
+$$ -x^2 + y^2 = 1 - \frac{121665}{121666}x^2y^2 $$
 
-È essenziale che il sistema incaricato dell'elaborazione di tali calcoli
-disponga di adeguata potenza computazionale e capacità di memoria. 
+La communità scientifica (il NIST) pensa che questa curva non sia così sicura e
+affidabile. 
 
-\subsection{MLSAG}
+Le curve Twisted Edwards sono di ordine $ N = 2^c l $ con $ l $ numero primo e $
+c $ un intero positivo. Nel caso di Ed25519 il suo ordine è di 76 cifre e quindi
+$ l $ è a 253 bits.
+$$ l = 2^3 \cdot
+7237005577332262213973186563042994240857116359379907606001950938285454250989 $$
 
-Se si vuole aumentare la complessità della firma, si possono usare sistemi 
-più complessi di Schnorr o simili. Tra i diversi troviamo MLSAG \footnote{Multi Layer
-Signature} che è fondamentale nella blockchain di Monero.
+Il campo $ F_{2^{255} - 19} $ è codificato in 32 byte, ovvero 256 bit. Di
+conseguenza, qualsiasi punto in Ed25519 potrebbe essere espresso utilizzando 64
+byte poichè includono sia una rappresentazione del punto $ R $ che un valore
+scalare $ S $ derivato da una computazione su una funzione di hash $ H $:
+$$ S = (H + \textit{private key} \times H) \mod l $$ Applicando le tecniche di
+point compression, descritte di seguito, tuttavia, è possibile ridurre questa
+quantità della metà, a 32 byte utilizzando tecniche di "Point Compression"
+\footnote{ Le tecniche di point compression (compressione dei punti) sono metodi
+utilizzati in crittografia ellittica per ridurre la quantità di dati necessari
+per rappresentare un punto su una curva ellittica. Questo è particolarmente
+utile per ridurre l'uso di memoria e banda, specialmente in applicazioni che
+richiedono l'invio o la memorizzazione di grandi quantità di punti su curve
+ellittiche, come nelle firme digitali o nei protocolli di scambio di chiavi.}.
 
+\subsection{Shnorr Signature Avanzato}
+In Shnorr base utilizziamo una sola chiave ma possiamo rendere Shnorr più
+sofisticato utilizzando più chiavi. Questo è il caso dello schema Multi Layer
+Linkable Spontaneous Anonymous (MLSAG), uno schema di firma che permette a più
+utenti di firmare un messaggio in modo anonimo. 
 
-\subsection{Privacy}
+È spesso vantaggioso dimostrare che la stessa chiave privata è stata utilizzata
+per generare chiavi pubbliche su basi diverse. Per esempio, consideriamo una
+chiave pubblica standard $kG$ e un segreto condiviso di Diffie-Hellman $kR$ con
+la chiave pubblica di un'altra persona, dove le basi sono rispettivamente $G$ e
+$R$. In questo contesto, possiamo dimostrare la conoscenza del logaritmo
+discreto $k$ relativo a $kG$, provare la conoscenza di $k$ in $kR$, e confermare
+che $k$ è identico in entrambe le situazioni, senza tuttavia rivelare il valore
+di $k$.
+
+È possibile trovare una \textit{Non-interactive proof\footnote{}} a pagina 25
+del white paper di Monero \cite{Zero To Monero}.
+
+Chiamiamo Non-Interactive Proof è un metodo crittografico in cui una parte (il
+provatore) può dimostrare a un'altra parte (il verificatore) che una certa
+affermazione è vera senza interagire direttamente con il verificatore durante il
+processo di prova, diversamente dal tradizionale \textit{Zero-knowledge proofs}
+che necessità di una interazione tra le parti simultanea.
+
+\subsection{Privacy in Monero}
 
 Monero può essere estratto sia da CPU che da GPU, ma la prima è molto più
 efficiente. E' evidente che sia la cripto valuta più pratica per il
@@ -397,75 +460,93 @@ attraverso la risoluzione di calcoli complessi (mining).} supportata da un
 CryptoNight. Al fine di fornire privacy e anonimato, Monero, si basa su due
 concetti importanti: Stealth Address e Ring Signature.
 
-\subsubsection{Stealth Address}
-    In un sistema distribuito, chiunque può vedere le transizioni, la data,
-    l'importo ed i portafogli o le entità coinvolte. Monero, per impedirlo,
-    utilizza la tecnica degli “Stealth address”. Questi, consentono e richiedono
-    al mittente di creare indirizzi casuali monouso per ogni transazione per
-    conto del destinatario. Il destinatario può pubblicare un solo indirizzo, ma
-    tutti i suoi pagamenti in entrata vanno a indirizzi univoci sulla
-    blockchain, dove non possono essere ricollegati né all'indirizzo pubblicato
-    del destinatario né agli indirizzi di altre transazioni. Utilizzando gli
-    indirizzi stealth, solo il mittente e il destinatario possono determinare
-    dove è stato inviato un pagamento.
+\subsubsection{Address}
+In tutte le blockchain, per ogni utente viene generato un indirizzo, questo è
+tutto ciò che serve per ricevere pagamenti. Poichè il libro mastro è pubblico,
+tutti possono vedere gli indirizzi e le transizioni e si può facilmente
+comprendere per ogni indirizzo l'ammontare di cripto valuta che possiede.
 
-    Una volta che qualcuno crea un account Monero, riceve una \textit{view key},
-    una \textit{spend key} ed un \textit{Public Address}. 
-    \begin{itemize}
-        \item La \textit{spend key} è utilizzata per inviare pagamenti.
-        \item La \textit{view key} è utilizzata per visualizzare le transazioni
-        in entrata nel proprio account.
-        \item Il \textit{Public Address} è utilizzato per ricevere pagamenti.
-    \end{itemize}
+Monero, diveresamente da altre cripto valute come BitCoin, utilizza nella
+transazione due coppie di chiavi private/pubbliche: $(k^v, K^v)$ e $(k^s, K^s)$.
+La seconda coppia è l'indirizzo del utente, mentre la prima è la corrispondente
+chiave privata. Indichiamo con $k^v$ le \textit{view key} e con $k^s$ la
+\textit{spend key}.
 
-    Sia la \textit{spend key} che la \textit{view key} sono utilizzate per
-    costruire l'indirizzo Monero. L'unico modo per visualizzare il proprio
-    wallet è utilizzare la propria \textit{view key}. Si può anche decidere di
-    condividere questa chiave con altri per permettere loro di vedere il proprio
-    saldo. Monero è privato per default e opzionalmente si può dire che sia
-    semi-trasparente.
+La chiave di visualizzazione viene utilizzata per verificare se un'uscita è
+associata al proprio indirizzo, mentre la chiave di spesa consente di "spendere"
+quell'uscita in una transazione per poi confermare che è stata spesa.
 
-    Inviare Monero è molto facile, basta conoscere l'indirizzo pubblico del
-    destinatario.
-    
-    Parafrasando Butrin\footnote{Vitalik Buterin, co-fondatore di Etherium}:
-    \begin{quote}
-        Sia il destinatario (chiamiamolo "Bob") che il mittente ("Alice")
-        possono generare un indirizzo invisibile per la transazione. Tuttavia,
-        solo il destinatario, Bob, può controllare la transazione. Un altro modo
-        di pensare a un indirizzo invisibile è come un indirizzo di portafoglio
-        legato crittograficamente all’indirizzo pubblico di Bob, ma che viene
-        rivelato solo alle parti che effettuano la transazione. \cite{Buterin
-        Quote}
-    \end{quote}
+Di seguito spiegherò in sintesi alcune scelte di design di Monero per garantire
+la massima riservatezza e anonimato nelle transizioni. Se si vuole approfondire
+si può consultare il white paper di Monero \cite{Zero To Monero} nelle pagine
+37-42.
 
-    \begin{figure}[ht]
-        \centering
-        \includegraphics[width=0.5\textwidth]{./images/stealth_address.png}
-        \caption{Connessione nascosta tra gli Stealth Address e i wallet}
-        \label{fig:encription}
-    \end{figure}
+\paragraph{One-time address}
+Se, generalmente, un utente deve condividere il proprio indirizzo per ricevere
+pagamenti, Monero utilizza un sistema di indirizzi monouso. Come facciamo a
+condividere un indirizzo monouso? Utilizzando uno scambio di tipo
+Diffie-Hellman, così anche un osservatore che conosce tutti gli address non può
+comprendere chi stia eseguendo la transizione e verso chi.
 
-    Il team di Buterin ha progettato un sistema di indirizzi nascosti (anche
-    detto SAP \footnote{Stealth Address Protocol}) chiamato BaseSAP. Il
-    protocollo mira a fornire un meccanismo leggero che consenta agli utenti di
-    generare indirizzi invisibili, mantenendo la completa compatibilità con le
-    versioni precedenti e non richiedendo modifiche alla blockchain principale.
-    BaseSAP è basato sul cifrario assimetrico su curve ellittiche Secp256k1,
-    migliorato attraverso l'integrazione di "tags di visualizzazione" utili a
-    rendere più efficiente l'analisi rispetto ai comuni DKSAPs
-    \footnote{Dual-Key Stealth Address Protocols}.
+Facciamo un esempio: Alice vuole inviare 10 Monero a Bob. Bob ha le proprie
+coppie di chiavi $(k^v_B, K^v_B)$ e $(k^s_B, K^s_B)$ e Alice conosce le chiavi
+pubbliche di Bob quindi il suo inidirizzo.
 
-    Questo protocolli sono la base per le implementazioni DKSAP usate in Monero.
-    Da quando DKSAP è nato, ha portato molti ricercatori a studiare e trovare
-    nuovi modi per migliorarlo:
+Parafrasando Butrin\footnote{Vitalik Buterin, co-fondatore di Etherium}:
+\begin{quote}
+    Sia il destinatario (chiamiamolo "Bob") che il mittente ("Alice") possono
+    generare un indirizzo invisibile per la transazione. Tuttavia, solo il
+    destinatario, Bob, può controllare la transazione. Un altro modo di pensare
+    a un indirizzo invisibile è come un indirizzo di portafoglio legato
+    crittograficamente all’indirizzo pubblico di Bob, ma che viene rivelato solo
+    alle parti che effettuano la transazione. \cite{Buterin Quote}
+\end{quote}
 
-    \begin{figure}[ht]
-        \centering
-        \includegraphics[width=0.95\textwidth]{./images/sommario.png}
-        \caption{Sommario dei lavori di ricerca sulle Stealth Address e compatibilità BaseSAP}
-        \label{fig:summary}
-    \end{figure}l
+Questi One-time address sono anche detti Stealth Address. Il team di Buterin ha
+progettato un sistema di indirizzi nascosti (anche detto SAP \footnote{Stealth
+Address Protocol}) chiamato BaseSAP. Il protocollo mira a fornire un meccanismo
+leggero che consenta agli utenti di generare indirizzi temporanei, mantenendo la
+completa compatibilità con le versioni precedenti e non richiedendo modifiche
+alla blockchain principale. BaseSAP è basato sul cifrario assimetrico su curve
+ellittiche Secp256k1, migliorato attraverso l'integrazione di "tags di
+visualizzazione" utili a rendere più efficiente l'analisi rispetto ai comuni
+DKSAPs \footnote{Dual-Key Stealth Address Protocols}.
+
+Questo protocolli sono la base per le implementazioni DKSAP usate in Monero. Da
+quando DKSAP è nato, ha portato molti ricercatori a studiare e trovare nuovi
+modi per migliorarlo:
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.95\textwidth]{./images/sommario.png}
+    \caption{Sommario dei lavori di ricerca sulle Stealth Address e compatibilità BaseSAP}
+    \label{fig:summary}
+\end{figure}l
+
+\begin{enumerate}
+    \item Alice genera una reale random $r \in \mathbf{Z}l $ e calcola il
+    One-time address $$ K^{o} = \mathcal{H}_n(rK^v_B)G+K^s_B $$ e definisce
+    $K^{o}$ come l'indirizzo di Bob, al quale specifica l'importo di 10 Monero
+    ed il valore $rG$ e pubblica il tutto sulla blockchain.
+    \item Bob, una volta ricevuti i dati, calcola $k^v_BrG = rK^v_B$ e calcola
+    ${K'}^s = K^o - \mathcal{H}_n(rK^v_B)G$. Una volta che ha ha compreso se
+    $K'^s = K^s$ comprendo che l'outout è per lui.
+    \item una volta che Bob avrà confermato che l'output è per lui utilizzando
+    la sua \textit{view key}, potrà firmare un messaggio con la sua
+    \textit{spend key} e inviarlo alla rete per dimostrare di essere Bob e
+    ricevere i Monero accordati.
+\end{enumerate}
+
+\paragraph{Subaddress}
+Un'altra tecnica per garantire la privacy è quella di utilizzare gli
+\textit{subaddress}. Ogni utente può generare dei subaddress partendo dal
+proprio address. Questi subaddress possono essere utilizzati per ricevere
+pagamenti, possiamo immaginare l'address come una 'Banca' e i subaddress come i
+relativi 'Bancomat'. Oltre ad essere utili per aumentare la privacy, l'utente
+che crea i propri subaddress può utilizzarli per distinziare una transazione da
+un'altra.
+
+\subsubsection{Amount Hiding}
 
 \subsubsection{Ring Signature}
 
@@ -486,14 +567,69 @@ rendere il crimine un vero e proprio business.
 
 \section{Casi reali}
 
+\subsection{WatchDog targets Docker Engine API endpoints and Redis servers}
+Un gruppo di hacker, chiamato WatchDog, ha attaccato i server
+Docker\footnote{Docker è una piattaforma software che permette di creare,
+testare e distribuire applicazioni con la massima rapidità. Docker raccoglie il
+software in unità standardizzate chiamate container che offrono tutto il
+necessario per la loro corretta esecuzione, incluse librerie, strumenti di
+sistema, codice e runtime. - AWS} e Redis\footnote{Redis, un sistema di gestione
+di database NoSQL lanciato nel 2009, utilizza un modello di archiviazione basato
+su coppie chiave/valore. Ogni dato è memorizzato in un dizionario, in cui una
+chiave univoca è associata a un valore specifico, rendendo semplice il recupero
+delle informazioni.}. Il gruppo riusciva ad infiltrarsi nei Docker Engine API
+attraverso la porta 2375 aperta, una volta dentro, gli intrusi, potevano
+accedere alla Shell di comando.
+
+\paragraph{Payload} Viene caricato nel container uno script \textbf{cronb.sh}
+che va a controllare lo stato del container ed eventualmente eseguire un secondo
+script \textbf{ar.sh}, il quale va sabatore completamente il container e
+caricare un miner XMRRig\footnote{Un software di mining di Monero}. Un ultimo
+Payload è una serie di script che gli intrusi usano per puntare ad altri sisteme
+collegati alla rete del container.\cite{WatchDog}
+
+\subsection{Alibaba ECS instances in cryptomining crosshairs}
+Come nel caso di Docker, anche in questo caso gli hacker hanno puntato alle
+sfrutture cloud, ma di Alibaba. I gruppi in question esembrerebbero essere
+TeamTNT, Kinsing ed altri.
+
+I server Alibaba ECS\footnote{Elastic Compute Service} sono forniti con un preinstallato 
+agente di sicurezza.  
+
+Di seguito un codice specifico del malware che crea
+regole firewall per eliminare i pacchetti in entrata da intervalli IP
+appartenenti a zone e regioni interne di Alibaba.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.95\textwidth]{./images/alibaba_firewall.png}
+    \caption{Codice dannoso che modifica le regole del firewall}
+    \label{fig:alibaba_firewall}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.95\textwidth]{./images/alibaba_agent_disable.png}
+    \caption{Script che disabilità l'agente di sicurezza di Alibaba}
+    \label{fig:alibaba_agent}
+\end{figure}
+
+Quando un malware di cryptojacking è attivo su un'istanza Alibaba ECS, l'agente
+di sicurezza installato, se lo rileva, notifica la presenza di uno script
+dannoso. A quel punto, è compito dell'utente, gestore della piattaforma,
+intervenire per arrestare l'infezione e le attività malevole. Alibaba Cloud
+Security fornisce indicazioni su come procedere, ma la responsabilità principale
+dell'utente rimane quella di prevenire l'infezione fin dall'inizio.
+
+
 \newpage
 
 \section{Bibliografia}
 \begin{thebibliography}{9}
 
 \bibitem{CSO}
-\href{https://arc.net/l/quote/karbftmg}{Cryptojacking explained, CSO}
-% \texttt{31-07-2024 15:00}
+Ericka Chickowski, \href{https://arc.net/l/quote/karbftmg}{Cryptojacking
+explained: How to prevent, detect, and recover from it, CSO}, 20 Giugno, 2022
 
 \bibitem{Botnet}
 \href{https://arc.net/l/quote/ftyxgxms}{Botnet, Wikipedia}
@@ -517,15 +653,29 @@ Stealth Address per star lontano dai radar?}}, Rypto.it, 15 Lugio 2023
 \bibitem{BaseSAP}
 Anton Wahrstatter , Matthew Solomon, Ben DiFrancesco, Vitalik Buterin, and Davor
 Svetinovic \textit{BaseSAP: Modular Stealth Address Protocol for Programmable
-Blockchains}, JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021, pp. 1–6
+Blockchains}, JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, Agosto 2021, pp. 1–6
 
 \bibitem{Zero To Monero}
-Koe, Kurt M. Alonso, Sarang Noether, \textit{A technical guide to a private
-digital currency; for beginners, amateurs, and experts} April 4, 2020 (v2.0.0)
+Koe, Kurt M. Alonso, Sarang Noether, \textit{Zero to Monero: Second Edition - A
+technical guide to a private digital currency; for beginners, amateurs, and
+experts} 4 Aprile 2020 (v2.0.0)
 
 \bibitem{Margara}
 Margara Luciano, \textit{Diffie Hellman, Crittografia su Curve Ellittiche} A.A.
 2023-2024
+
+\bibitem{EdDSA}
+Simon Josefsson and Ilari Liusvaara. Edwards-Curve Digital Signature Algorithm
+(EdDSA). RFC 8032, Gennaio 2017. https://rfc-editor.org/rfc/rfc8032.txt
+
+\bibitem{WatchDog}
+\href{https://cyware.com/news/watchdog-targets-docker-and-redis-servers-in-new-cryptojacking-campaign-a5681a92}{WatchDog
+Targets Docker And Redis Servers In New Cryptojacking Campaign}, 06 Giugno 20222
+
+\bibitem{Alibaba}
+David Fiser, Alfredo Oliveira,
+\href{https://www.trendmicro.com/en_us/research/21/k/groups-target-alibaba-ecs-instances-for-cryptojacking.html}{Groups
+Target Alibaba ECS Instances for Cryptojacking}, 15 Novembre 2021
 
 \end{thebibliography}
 
