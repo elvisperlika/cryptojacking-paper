@@ -72,8 +72,8 @@ attacco, le tecnologie coinvolte e i relativi aspetti tecnici per poi esporre le
 contromisure per prevenire e individuare questi malware al intero delle proprie
 macchine. In particolare, nella sezione \hyperref[sec:aspetti_tecnici]{"Aspetti
 Tecnici"} si andarà ad analizzare nel dettaglio il mining di Monero, una delle
-criptovalute più utilizzate per il cryptojacking e l'algoritmo CryptoNight,
-utilizzato per minare Monero.
+criptovalute più utilizzate per il cryptojacking e l'algoritmo RandomX (che ha
+sostituito CryptoNight), utilizzato per minare Monero.
 
 \subsection{Storia}
 
@@ -249,13 +249,8 @@ utilizzate per il cryptojacking.
 
 La criptovaluta Monero, inizialmente nota come BitMonero, è stata creata
 nell'aprile 2014 come deriva della valuta proof-of-concept CryptoNote. Monero
-significa "denaro" nella lingua esperanto.
-
-CryptoNote è una criptovaluta ideata da vari individui. Un white paper di
-riferimento che lo descrive è stato pubblicato sotto lo pseudonimo di Nicolas
-van Saberhagen nell'ottobre 2013. Grazie a CryptoNote e al suo algoritmo di
-hashing, CryptoNight, Monero è diventata una delle criptovalute più popolari per
-il mining.
+significa "denaro" nella lingua esperanto. Monero è , grazie alle sue features,
+una delle criptovalute più popolari per il mining.
 
 Una delle filosofie di Monero è quella di mantenere un mining egualitario, in
 modo che tutti possano avere la possibilità di fare mining. Per raggiungere
@@ -465,9 +460,8 @@ processo di prova, diversamente dal tradizionale \textit{Zero-knowledge proofs}
 che necessità di una interazione tra le parti simultanea.
 
 \subsection{Privacy in Monero}
-
 Monero può essere estratto sia da CPU che da GPU, ma la prima è molto più
-efficiente. E' evidente che sia la cripto valuta più pratica per il
+efficiente. E' evidente che sia la criptovaluta più pratica per il
 cryptojacking, poiché può essere minata solo su macchine a livello consumer, le
 quali sono faccilemente accessibili da cyber-criminali attraverso i metodi
 precedentemente citati. Inoltre, utilizza una blockchain\footnote{Libro
@@ -476,15 +470,32 @@ criptovaluta in quanto tiene memoria di tutte le transizioni eseguite nella
 storia della realtiva criptovaluta. Viene detta blockchain poiché è una catena
 di blocchi, ognuno rappresenta una transizione che viene agganciata alla catena
 attraverso la risoluzione di calcoli complessi (mining).} supportata da un
-\textbf{Privacy-enhancing technologies} sofisticato, il quale derivava da
-CryptoNight. Al fine di fornire privacy e anonimato, Monero, si basa su due
-concetti importanti: Stealth Address e Ring Signature.
+\textbf{Privacy-enhancing technologies} sofisticato al fine di fornire privacy e
+anonimato, le feature più rilevanti sono: One Time Address e Ring Signature.
 
 \subsubsection{Address}
 In tutte le blockchain, per ogni utente viene generato un indirizzo, questo è
 tutto ciò che serve per ricevere pagamenti. Poichè il libro mastro è pubblico,
 tutti possono vedere gli indirizzi e le transizioni e si può facilmente
 comprendere per ogni indirizzo l'ammontare di cripto valuta che possiede.
+
+Un indirizzo Monero è una stringa di 95 caratteri alfanumerici che inizia con
+\textit{4} per gli indirizzi standard e \textit{8} per gli indirizzi
+integrati\footnote{Indirizzi Integrati combinano al indirizzo un ID codifificato
+a 64-bit per identificare un pagamento. È possibile trovare un approfondimento a
+pagina 41 de \cite{Zero To Monero}}. Un esempio di indirizzo Monero è:
+
+\begin{verbatim}
+    888tNkZrPN6JsEgekjMnABU4TBzc2Dt29EPAvkRxbANsAnjy
+                    Pbb3iQ1YBRk1UXcdRsiKc9dhwMVgN5S9cQUiyoogDavup3H.
+\end{verbatim}
+
+Essendo difficile da ricordare e/o scrivere, Monero permette di generare un
+indirizzo alias generato con una tecnologia Monero chiamata \textbf{OpenAlias}.
+In genere i classici generatori di alias sono semplici database di coppie
+chiave-valore, invece OpenAlias si comporta come un DNS, ovvero un sistema di
+risoluzione degli indirizzi. Questa tecnlogia associa ad ogni indirizzo Monero
+un nome di dominio, (ad esempio: donate.getmonero.org).
 
 Monero, diveresamente da altre cripto valute come BitCoin, utilizza nella
 transazione due coppie di chiavi private/pubbliche: $(k^v, K^v)$ e $(k^s, K^s)$.
@@ -561,14 +572,178 @@ modi per migliorarlo:
 Un'altra tecnica per garantire la privacy è quella di utilizzare gli
 \textit{subaddress}. Ogni utente può generare dei subaddress partendo dal
 proprio address. Questi subaddress possono essere utilizzati per ricevere
-pagamenti, possiamo immaginare l'address come una 'Banca' e i subaddress come i
-relativi 'Bancomat'. Oltre ad essere utili per aumentare la privacy, l'utente
-che crea i propri subaddress può utilizzarli per distinziare una transazione da
-un'altra.
+pagamenti senza dover condividire sempre lo stesso address, possiamo immaginare
+l'address come una 'Banca' e i subaddress come i relativi 'Bancomat'. Oltre ad
+essere utili per aumentare la privacy, l'utente che crea i propri subaddress può
+utilizzarli per distinziare una transazione da un'altra.
+
+Andiamo a vedere come funziona la creazione di un subaddress:
+
+Un utente, Bob, crea un numero $ i $ di subaddress a partire dal proprio
+address, i subaddress sono della stessa forma di un address standard, quindi una
+coppia di chiavi pubbliche$ K^{v,i} $ e $ K^{s,i} $; una \text{view} ed una
+\text{spend}.
+
+$$ K^{s,i} = K^s + \mathcal{H}_n(k^v, i)G $$ 
+
+$$ K^{v,i} = k^vK^{s,i} $$
+
+L'altro utente, Alice, della transazione invierà una certa somma di Monero al
+sotto indirizzo $ (K^{v,i}, K^{s,i}) $ nel modo spiegato nel capitolo
+\textit{One-time address}.
+
+Bob potrà, così, controllare i subaddress per vedere se ci sono transazioni per
+lui: Se 
+$$ K^{is}_B = K^o - \mathcal{H}_n(rK^{v,i}_B, \textit{valore della
+transazione})G $$ e $$ K^{'s}_B = K^{s,i} $$ allora Bob sa di essere il
+destinatario.
 
 \subsubsection{Amount Hiding}
 
 \subsubsection{Ring Signature}
+
+\subsection{La blockchain di Monero}
+
+\subsubsection{RandomX}
+RandomX è un algoritmo Proof-of-Work (PoW), questo algoritmo permette di
+estrarre dalle CPU un calcolo computazionale che permetta di eguagliare la
+velocità degli hardware specializzati. Abbiamo già anticipato nei capitoli
+precedenti che Monero è una criptovaluta particolarmente pratica per essere
+minata con CPU, questo è merito dell'algoritmo RandomX. Il core di questo
+algoritmo è la simulazione di una CPU virtuale.
+
+RandomX, compialto in \textit{C++11}, è eseguito su una Macchina Virtuale e può
+funzionare in 2 modalità di esecuzione intercammbiabili:
+
+\begin{itemize}
+    \item \textbf{Fast mode}: è la modalità di esecuzione più veloce, ma
+    richiede 2020MiB di memoria condivisa
+    \item \textbf{Light mode}: è la modalità di esecuzione più leggera e lenta,
+    ma richiede 256MiB di memoria condivisa
+\end{itemize}
+
+Per utilizzare RandomX è necessario andare a configuraralo, di seguito la
+tabella dei parametri configurabili presa dal repository del algoritmo:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.61\textwidth]{./images/randomx_parameters.png}
+    \caption{Parametri configurabili}
+    \label{fig:parameters}
+\end{figure}
+
+L'algoritmo necessita di due valori in input:
+
+\begin{itemize}
+    \item una chiave $k$ (una stringa lunga 0-60 bytes)
+    \item un valore $H$ di lunghezza scelta che farà da parametro della funzione
+    di hash
+\end{itemize}
+
+Il funzionamento di RandomX è definito dai seguenti passaggi:
+
+\begin{enumerate}
+    \item Inizializzare il dataset.\\
+        La chiave $k$ permette di inizializzare il Dataset, cioè la struttura di
+        memorizzazione di sola lettura che viene utilizzata durante la
+        computazione. La grandezza di questa struttura è data dalla somma dei
+        seguenti valori:
+
+        \begin{verbatim}
+            RANDOMX_DATASET_BASE_SIZE + RANDOMX_DATASET_EXTRA_SIZE
+        \end{verbatim}
+
+        e frazionata in frammetni di 64 byte che chiameremo \textit{items}.
+        L'intero dataset è costruito partendo dalla chiave $k$ seguendo lo
+        schema di seguito:
+
+        \begin{figure}[ht]
+            \centering
+            \includegraphics[width=0.99\textwidth]{./images/dataset_construction.png}
+            \caption{Costruzione del dataset}
+            \label{fig:data_construction}
+        \end{figure}
+
+        \textit{Argon2d} è una funzione derivata da Argon2\footnote{Argon2 è una
+        funzione di hash per le password che occupa molta memoria}
+        "tradeoff-resisistent".
+
+        La chaive $k$ è utilizzata per inizializzare un
+        BlakeGenerator\footnote{Pseudo random generator basato su Blake2b} che a
+        sua volta permette di creare 8 \textit{SuperscalarHash}.
+        \textit{SuperscalarHash} è una funzione di diffusione progettata per
+        consumare quanta più energia possibile utilizzando soltanto le
+        ALU\footnote{Arithemtic Logic Unit} della CPU. Questa funzione va a
+        prendere in input 8 registri di dimensione 64 byte e restituisce il
+        DataSet.
+
+    \item calcolare il \textit{seed}, $S$=Hash512($H$)\footnote{Funzione di
+        hashing derivata da Blake2b con output di grandezza 512 bit} di
+        dimensione 64 byte.
+    \item calcolare $gen1$= AesGenerator1R($S$), AesGenerator1R è una funzione
+        generatrice di stringhe pseudo random. 
+
+        Il generatore produce 4 chiavi:
+
+        \begin{verbatim}
+key0, key1, key2, key3 = Hash512("RandomX AesGenerator1R keys")
+        \end{verbatim}
+        
+        che utilizza per creare i nuovi stati del generatore:
+
+        \begin{verbatim}
+state0 (16 B)    state1 (16 B)    state2 (16 B)    state3 (16 B)
+    |                |                |                |
+AES decrypt      AES encrypt      AES decrypt      AES encrypt
+(key0)           (key1)           (key2)           (key3)
+    |                |                |                |
+    v                v                v                v
+ state0'          state1'          state2'          state3'
+        \end{verbatim}
+
+    \item nello \textit{Scrathpad}\footnote{Area di memoria usata dalla Virtual
+    Machine. È strutturata in 3 livelli: L3$\rightarrow$L2$\rightarrow$L1}
+    vengono scritti \textbf{RANDOMX\_SCRATCHPAD\_L3} byte casuali sfruttando
+    $gen1$ creato precedentemente.
+
+    \item generiamo $gen4$ utilizzando lo stato finale di $gen1$:
+    $gen4$=AesGenerator2R($gen1$.state)
+
+    \item si assegna il valore 0 al registro \textit{fprc}\footnote{Determina la
+    modaliotà di arrotondamento dei numeri in virgola mobile}
+
+    \item si programma la Virtual Machine utilizzando \textbf{128 + 8 *
+    RANDOMX\_PROGRAM\_SIZE} bytes provenienti da $gen4$ e la si esegue
+
+    \item si calcola un nuovo seme $S$=Hash512($S$) e lo si assegna allo stato
+    del generatore $gen4$: $gen4$.state=($S$)
+
+    \item si ripetono i punti 7 ed 8 per \textbf{RANDOMX\_PROGRAM\_COUNT} volte
+    
+    \item si crea una impronta diitale dello Scrathpad:
+    $A$=AesHash1R(Scrathpad)\footnote{Funzione di hash derivata da AES capace di
+    produrre più di 10 bytes per clock}
+
+    \item si va ad assegnare ai byte 192-255 del \textit{Register File} il
+    valore A
+
+    \item si calcola il risulato $ R $= Hash256(\textit{Register
+    File})\footnote{Come Hash512 ma con output di 256 bit}
+
+\end{enumerate}
+
+\paragraph{Virtuale Machine}
+La Virtual Machine di RandomX è strutturata nel seguente modo:
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.99\textwidth]{./images/vm_randomX.png}
+    \caption{RandomX Virtual Machine}
+    \label{fig:vm_randomX}
+\end{figure}
+
+L'architettura della Virtual Machine è di tipo CISC\footnote{Complex Instruction
+Set Computer} e tutti i dati sono caricati in little-endian. 
 
 \newpage 
 
@@ -651,6 +826,38 @@ del traffico di rete oltre che dell'utilizzo della CPU. Esistono vari strumenti
 per monitorare il traffico di rete, come Wireshark, che consentono di
 identificare rapidamente eventuali attività malevole. Sarebbe utile avere filti
 nelle interfacce di rete per bloccare eventuali pacchetti non certificati. 
+
+\subsubsection{Sistemi di monitoraggio Cloud e sicurezza runtime dei container}
+I fornitori di servizi cloud offrono strumenti di monitoraggio avanzati che
+consentono di individuare attività sospette, un esempio è quello di Google Cloud
+che ha modernizzato il \textit{Security Command Center: piattaforma di
+monitoraggio della sicurezza progettata per aiutare le organizzazioni a gestire
+e migliorare la loro postura di sicurezza nel cloud.}, andando ad integrare
+Virtual Machine Threat Detection (VMTD). Questo sistema è in grado di proteggere
+il cloud da attacchi informatici di vario genere e di individuare attività di
+cryptojacking.
+
+\subsubsection{Attuare il Threat hunting}
+Il threat hunting è eseguito da specialisti conosciuti come threat hunters, i
+quali sono incaricati di individuare, isolare e neutralizzare minacce
+informatiche avanzate. Questi professionisti si dedicano all'analisi di
+comportamenti anomali e indicatori di compromissione (IoC) al fine di scoprire
+attività dannose che non sono state rilevate dai tradizionali strumenti di
+sicurezza.
+
+A differenza di altre pratiche di sicurezza, come la risposta agli incidenti o i
+penetration test, il threat hunting parte dal presupposto che una minaccia sia
+già penetrata nel sistema. Gli esperti di threat hunting esaminano i dati per
+individuare indirizi di compromissione e tentativi di attacco, impiegando
+tecniche di analisi comportamentale e informazioni derivate dall'intelligence
+sulle minacce.
+
+\subsubsection{Monitora i tuoi siti web}
+I siti web sono spesso bersagli di attacchi di cryptojacking, poiché gli hacker
+possono inserire script malevoli nei siti web, non per colpire i server, ma per
+colpire i visitatori. Per monitorare i siti web, è possibile utilizzare
+strumenti come Web Inspector, che consentono di individuare e rimuovere script
+malevoli.
 
 \newpage
 
@@ -842,6 +1049,10 @@ Di seguito un'immagine.
 
 \newpage
 
+\section{Conclusioni}
+
+\newpage
+
 \section{Bibliografia}
 \begin{thebibliography}{9}
 
@@ -895,6 +1106,9 @@ of miner bots and backdoors leveraged Log4J to attack VMware Horizon servers},
 Lisa Vaas,
 \href{https://threatpost.com/linux-cryptojacking-gang-romania/167783/}{Linux-Focused
 Cryptojacking Gang Tracked to Romania}, 14 Giugno 2021
+
+\bibitem{RandomX}
+tevador, \href{https://github.com/tevador/RandomX}{RandomX GitHub}
 
 \end{thebibliography}
 
