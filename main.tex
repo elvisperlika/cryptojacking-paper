@@ -57,7 +57,7 @@ Gli Hacker hanno come obbiettivo quello di prendere il controllo del maggior
 numero possibile di sistemi con l'obbiettivo di minare quante più criptovalute,
 illecitamente. Questo sistema di hacking non punta unicamente la classica utenza
 di Personal Computer ma cerca di sfruttare anche le risorse di Server e
-infrastrutture Cloud e in generale ogni tipologia di sistema computazione con un
+infrastrutture Cloud e in generale ogni tipologia di macchine computazione con un
 accesso alla rete Internet.
 
 La caratteristica fondamentale di questo malware è far sì che la vittima sia
@@ -122,25 +122,26 @@ bibliografia.
 
 \subsection{Problema e Motivazione}
 Questo documento punta a fornire al lettore una maggiore comprensione del mondo
-delle criptovalute e di come queste possono anche portare alcuni soggetti a
-compiere atti criminali allo scopo di arricchirsi con esse. Si vuole formire ai
-lettori le armi per comprendere se la propria macchina o quella su cui si sta
-lavorando sia infetta e come prevenire una possibile iniezzione di malware di
-cryptojacking.
+delle criptovalute e di come queste possono portare alcuni soggetti a compiere
+atti criminali allo scopo di arricchirsi con esse. Si vuole formire ai lettori
+le armi per comprendere se la propria macchina o quella, ad esempio aziendale,
+su cui si sta lavorando sia infetta e come prevenire una possibile iniezzione di
+malware di cryptojacking.
 
 In questo periodo storico la computazione rapida ed efficiente sono
-deterministici nel ambito della ricerca e in quello del \textit{consumer} e, di
-conseguenza, trovarsi con macchine che impiegano parte della loro capacità di
-computazione per scopi di cui il proprietario della macchina non è a conoscenza
-causa gravi danni economici oltre a danni ambientali dovuti ad un non calcolato
-consumo energetico.
+deterministici nel ambito della ricerca e in quello del \textit{consumer
+service} e, di conseguenza, trovarsi con macchine che impiegano parte della loro
+capacità di computazione per scopi di cui il proprietario della macchina non è a
+conoscenza causa gravi danni economici oltre a danni ambientali dovuti ad un non
+calcolato consumo energetico.
 
 \newpage
 
 \section{Come funziona}
-Il mining, cioè il processo che Bitcoin e altre cripto valute utilizzano per
-coniare virtualmente nuove monete digitali e certificare le transazioni, usando
-le relative monete, è completamente lecito. 
+Il mining è il processo che Bitcoin e altre criptovalute utilizzano per coniare
+virtualmente nuove monete digitali e certificare le transazioni delle stesse
+monete. Di base, il mining, è un processo lecito se venisse computato su macchine 
+proprie.
 
 Nel dettaglio troviamo vaste reti decentralizzate di computer in tutto il mondo
 che verificano e proteggono le blockchain, ovvero i registri virtuali che
@@ -149,11 +150,12 @@ potenza di elaborazione, l'utente del computer della rete che per primo risolve
 i calcoli complessi dovuti alla certificazione della transizione viene premiato
 con nuove monete. Si tratta di un circolo virtuoso: i minatori mantengono e
 tutelano la blockchain, la blockchain assegna le monete, le monete fungono da
-incentivo ai minatori per continuare a mantenere la blockchain. Il mining è
-l'unico modo per rilasciare nuove cripto monete nella rete ed è un processo che
-richiede molta potenza di calcolo con un effort inversamente proporzionale al
-mining effettuato portando così ad un aumento della difficoltà di mining e ad
-una conseguente crescita dei costi.
+incentivo ai minatori per continuare a mantenere la blockchain. Il mining non è
+l'unico modo per rilasciare nuove cripto monete nella rete, anche il creatore
+della criptovaluta può decidere di rilasciare nuove monete da dividire con i
+suoi utenti. Il mining è un processo che richiede molta potenza di calcolo con
+un effort inversamente proporzionale al mining effettuato portando così ad un
+aumento della difficoltà di mining e ad una conseguente crescita dei costi.
 
 Il cryptojacking sfrutta questo processo, ma in modo illecito. Gli hacker
 inseriscono codice malevolo nei siti web o nei messaggi di posta elettronica che
@@ -166,7 +168,7 @@ riducendo i costi e aumentando i guadagni.
 I metodi per attaccare un sistema con il cryptojacking sono molteplici e variano
 a seconda del tipo di sistema che si vuole attaccare. I metodi più comuni sono:
 
-\subsection{Attaccare diretamente i Personal Computer}
+\subsection{Attaccare direttamente i Personal Computer}
 Attaccare uno o più PC è il classico metodo per creare un sistema di
 cryptojacking. Tipicamente l'hacker riesce ad iniettare il suo software di
 mining all'interno della macchina usando tecniche come:
@@ -178,7 +180,7 @@ mining all'interno della macchina usando tecniche come:
         possono anche, attraverso la rete, inivare pacchetti malevoli che
         installano backdoor che risiedono nella memoria kernel.
         \item \textit{Fileless Malware with Indirect File Activity}: non scrive
-        direttamente i file sul disco, ma gli autori delle minacce possono
+        direttamente i file sul disco, ma gli autori della iniezzione possono
         installare un comando PowerShell all'interno del repository WMI
         configurando un filtro WMI per la persistenza. Anche se in teoria
         l'oggetto WMI dannoso esiste su un disco, non tocca il file system sul
@@ -198,12 +200,12 @@ mining all'interno della macchina usando tecniche come:
     \item \textbf{Embedded di script malevoli al interno di siti o web app}: gli
         hacker possono sfruttare script all'interno dei siti, che eseguiti
         automaticamente dai browser, minano le cripto valute. Questo metodo è
-        molto più diffuso e meno invasivo rispetto al precedente, poiché non
-        sscarica alcun codice nel dispositivo.
+        molto più diffuso e meno invasivo rispetto ai precedenti, poiché non
+        scarica alcun codice nel dispositivo.
 \end{itemize}
 
 \subsection{Cercare server e dispositivi di rete vulnerabili}
-I server sono un obbiettivo molto ambito per gli hacker, in quanto sono
+I server sono un obiettivo molto ambito per gli hacker, in quanto sono
 dispositivi molto potenti e spesso connessi a Internet 24/7. Gli hacker possono
 sfruttare vulnerabilità come Log4J\footnote{"La vulnerabilità Log4j, conosciuta
 anche come Log4Shell, è una vulnerabilità critica scoperta nella libreria di
@@ -211,12 +213,12 @@ registrazione Apache Log4j nel novembre del 2021. Sostanzialmente, Log4Shell
 concede agli hacker il controllo totale dei dispositivi eseguendo versioni di
 Log4j senza patch." - \href{https://arc.net/l/quote/zjujxamu}{IBM}} per
 iniettare i propri sistemi di cryptojacking in queste potenti macchine. Spesso i
-server compromessi vengono anche utilizzi come potente per accedere con maggior
+server compromessi vengono anche utilizzi come ponti per accedere con maggior
 semplicità ad altri dispositivi per eseguire attacchi più complessi ed
 orizzontali.
 
 \subsection{Attaccare il sistema di produzione di software}
-Un altro metodo molto comune è quello di attaccare il sistema di seminare
+Un altro metodo molto comune è quello di attaccare le macchine è seminare
 repository open-souce nelle quali è stato iniettato il loro codice malevolo.
 Grazie ai programmatori che utilizzano questi codici è possibile per gli hacker
 raggiungere un numero elevato di macchine e scalare velocemente il loro sistema
@@ -237,7 +239,7 @@ per i server, gli aggressori sfruttano il cloud service violato ed attraverso lo
 stesso puntano a raggiungere altre infrastrutture simili. Questi sono gli
 attacchi più redditizi. \\
 L'aspetto rilevante, in tutti gli approcci sopra citati, è che gli hacker
-possano accedere a quante più macchine computazionali.
+vogliono e possano accedere a quante più macchine computazionali.
 
 \newpage 
 
@@ -471,7 +473,7 @@ storia della realtiva criptovaluta. Viene detta blockchain poiché è una catena
 di blocchi, ognuno rappresenta una transizione che viene agganciata alla catena
 attraverso la risoluzione di calcoli complessi (mining).} supportata da un
 \textbf{Privacy-enhancing technologies} sofisticato al fine di fornire privacy e
-anonimato, le feature più rilevanti sono: One Time Address e Ring Signature.
+anonimato, le feature più rilevanti sono: One Time Address, Amount Hiding e Ring Signature.
 
 \subsubsection{Address}
 In tutte le blockchain, per ogni utente viene generato un indirizzo, questo è
@@ -599,6 +601,8 @@ transazione})G $$ e $$ K^{'s}_B = K^{s,i} $$ allora Bob sa di essere il
 destinatario.
 
 \subsubsection{Amount Hiding}
+
+
 
 \subsubsection{Ring Signature}
 
