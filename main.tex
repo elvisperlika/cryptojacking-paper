@@ -271,7 +271,7 @@ transizioni. Procediamo con criterio per capire come funzionano le curve
 ellittiche, questo sarà fondamentale per comprendere il funzionamento di Monero
 e delle sue caratteristiche di privacy.
 
-\subsubsection{Aritmetica Modulare}
+\subsubsection*{Aritmetica Modulare}
 L'aritmetica modulare, detta anche \textit{Aritmetica dell'orologio}, è un
 sistema di aritmetica degli interi, in cui i numeri "si avvolgono su loro
 stessi" ogni volta che raggiungono i multipli di un determinato numero $ n $,
@@ -293,7 +293,7 @@ dove $ x $ è il quoziente e $ c $ è il resto di $ a \mod b $.
 
 Ne seguono alcune proprietà che verranno definite in seguito ma è fondamentale capire che questo tipo di calcoli, su numeri a decine di migliaia di cifre, per un calcolatore sono di una difficoltà computazionale molto alta.
 
-\subsubsection{Curve Ellittiche}
+\subsubsection*{Curve Ellittiche}
 Definiamo una curva ellittica $ E $ su un campo finito $ F_p $ dove $ p $ è un
 numero primo a 256 bit e la presentiamo in forma di Weierstrass come:
 
@@ -363,10 +363,9 @@ ideato da Clauss Schnorr nel 1989. È uno dei primi protocolli basati sulla
 \textbf{impraticibiltà} nel risolvere il problema del logaritmo discreto, la sua
 funzione è permette di dimostrare ad una delle 2 parti in comunicazione di
 conoscere la chiave privata relativa a quella pubblica senza rivelare, appunto,
-quella privata. Questo algoritmo ci sarà utile per quando tratteremo le Ring
-Signature (tradotte: Firme ad Anello).
+quella privata. Questo algoritmo ci sarà utile per quando tratteremo le Ring Confidential Transactions relative alle Ring Signatures di Monero.
 
-\subsubsection{Algoritmo}
+\subsubsection*{Algoritmo}
 
 È fondamentale che tutti gli utenti della commuicazione concordino sul gruppo
 abeliano $ G $, di ordine $ q $, generato da $ g $ e per assunzione in questo
@@ -474,9 +473,9 @@ storia della realtiva criptovaluta. Viene detta blockchain poiché è una catena
 di blocchi, ognuno rappresenta una transizione che viene agganciata alla catena
 attraverso la risoluzione di calcoli complessi (mining).} supportata da un
 \textbf{Privacy-enhancing technologies} sofisticato al fine di fornire privacy e
-anonimato, le feature più rilevanti sono: One Time Address, Amount Hiding e Ring Signature.
+anonimato, le feature più rilevanti sono: One Time Address, Amount Hiding e RingCT
 
-\subsubsection{Address}
+\subsubsection*{Address}
 In tutte le blockchain, per ogni utente viene generato un indirizzo, questo è
 tutto ciò che serve per ricevere pagamenti. Poichè il libro mastro è pubblico,
 tutti possono vedere gli indirizzi e le transizioni e si può facilmente
@@ -604,15 +603,90 @@ $$ K^{is}_B = K^o - \mathcal{H}_n(rK^{v,i}_B, \textit{valore della
 transazione})G $$ e $$ K^{'s}_B = K^{s,i} $$ allora Bob sa di essere il
 destinatario.
 
-\subsubsection{Amount Hiding}
+\subsubsection*{Amount Hiding}
 Per quanto rigurda l'amount hiding, ci riferiamo a quest ultimo come il sistema
-che ci permette di nascondere il saldo del nostro Wallet.
+che ci permette di nascondere il saldo del nostro Wallet. In Monero, per nascondere i valori delle transizioni, si utilizzano i \textbf{Commitements}. 
+In termini semplici, con \textbf{Commitements Scheme} si intende l'impegnarsi 
+ad eseguire una transazione di un certo valore senza rivelare il valore stesso.
 
-\subsubsection{Ring Signature}
+\paragraph{Esempio pratico di Commitements}
+
+In un gioco del lancio della moneta, Alice può chiamare una faccia
+("impegnadosi" così a voler ottenere quella una volta effettuato il lancio da Bob) ma va ad applicare una maschera (un hashing) sul "impegno preso" che annuncerà in pubblico senza che nessuno lo possa comprendere. A questo punto Bob lancia la moneta e mentre la moneta è in volo, Alice rivela l'impegno mascherato (annuncia quale moneta si aspetta di ricevere) e Bob rivela il risultato del lancio. Se Alice ha indovinato, Bob le darà la moneta.
+
+\paragraph{Amount Commitements} Nel caso di Monero, più nel dettaglio, si utilizzano i \textbf{Pedersen Commitements}. Questi hanno la peculiarità di essere definiti da una funzione che rispetta le caratteristiche delle Applicazioni Lineari; quindi una Applicazione Lineare.
+
+Definiamo un commitements di un valore $ b $ come:
+$$ C(y, b) = yG + bH $$
+
+Poichè il ricevente deve essere ingrado di conoscere quanto riceve nelle varie transazioni, banalmente per poi essere lui ad essere il mittente di altre nuove transazioni è necessario che i parametri $ y $ e $ b $ siano noti a Bob. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.99\textwidth]{./images/addKeys2.png}
+    \caption{Codice derivante dal sorgente OS Monero che si occupa di costruire la funzione matematica riportata sopra}
+    \label{fig:summary}
+\end{figure}
+
+Per effettuare questo tipo di comunicazione, Monero utilizza un sistema Diffie-Hellman per condividersi i segreti $ y $ e $ b $.
+
+È chiaro che chiunque venga a conoscenza della chaive di visualizzazione $ k^v $ di Bob potrà vedere i valori delle transizioni e anche controllare che siano concordi con gli impegni (commitment) associati.
+
+\subsubsection*{RingCT}
+
+Una transazione Monero è composta anche da riferiemti ad altre transizioni. 
+
+\paragraph{Ring Signature}
+Le Ring Signature (in italiano: Firma ad Anello) sono un tipo di firma digitale la quale permette ad un utente di firmare un messaggio a nome di un gruppo di utenti senza che sia rivelata l'identità del utente che ha eseguito la firma.
+La base di una firma ad anello è un gruppo di potenziali firmatari, ciascuno con la propria coppia di chiavi univoche (chiavi pubbliche e private). Il firmatario stesso forma un “anello” con le chiavi pubbliche degli altri membri del gruppo. È uno strumento che protegge la privacy del mittente di una transazione rendendo le stesse indistinguibili da altre transazioni.
+
+\paragraph{Ring Confidential Transactions}
+Abbiamo già definito le chiavi di spesa che possono essere utilizzate soltanto per una transazione.
+
+Prima della implementazione delle RingCT Monero necessitava che le sue transazioni venissero suddivise in sotto transazioni di specifiche misure. 
+Ad esempio: una transazione di $ 12.5 $ Monero veniva divisa in 3 anelli di taglio: $ 10 $, $ 2 $ e $ 0.5 $ Monero. Questo sistema garantiva la presenza di numero elevato di membri nella transazione principale (triplicandone il numero) ma non garantiva la privacy dell'utente poichè un osservatore poteva facilmente leggere i valori delle transazioni. Per risolvere questo problema, Monero ha implementato le Ring Confidential Transactions (RingCT) ad inizio 2017. Questa tecnologia ha ricevuto in poco tempo un grande apprezzamento da parte della comunità di Monero tanto che nel Settembre 2017 è stata implementata in modo predefinito.
+
+Con RingCT, le nuove monete minate dalla community prima di entrare nel sistema venogno mascherate per poi essere inserite in una transazione RingCT. 
+Una delle caratteristiche chiave di RingCT è che avendo gli ammontari delle gtransazioni nascosti, è possibile scegliersi gli utenti che parteciperanno al anello della transazione rendendola, così, ancora più sicura.
+
+\paragraph{Esempio pratico di RingCT}
+
+Alice deve $ 2.50 $ Monero a Bob ed ha un portafoglio di $ 12.56 $ Monero. Poichè gli output del proprio portafoglio non possono essere spesi più volte, Alice dovrà creare una transazione che includa un output di $ 2.50 $ Monero per Bob e un output di $ 10.06 $ Monero per se stessa. Avremo quindi una situazione nella quale per Alice esite un input che descrive il valore del suo portafoglio ed un output che corrisponde al valore alla transazione. Per dimostrare che la transazione non sia frutto di un operazione malevola e che Alice abbia effettivamente i $ 12.56 $ Monero si andaranno a confrontare i valori dell'input e dell'output.
+
+$$ \sum \text{input} = \sum \text{output} $$
+
+A causa delle proprietà crittografiche delle RingCT: 
+
+$$ \text{RingCT} = xG + aH(G) $$ 
+
+Alice dovrà andare a creare un Commitement per l'importo della transazione che in seguito i minatori andranno a verificare anche avendo a disposizione pochisse informazioni andando a verificare che l'ammontare del importo corrisponda al portafoglio di Alice.
+
+\paragraph{Range Proof}
+
+Questa tecnologia dimostra che il valore di un impegno è positivo e che non supera un certo limite. Questo è necessario per evitare che un utente possa creare un impegno negativo e creare monete dal nulla.
+Lo scopo di una Range Proof è dimostrare che si tratta di una transizione sicura e che si può proseguire con la accettazione della stessa.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.79\textwidth]{./images/before.png}
+    \caption{Senza i sistemi di privacy di Monero}
+    \label{fig:summary}
+\end{figure}
+
+$$ \downarrow $$
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.79\textwidth]{./images/after.png}
+    \caption{Con i sistemi di privacy di Monero}
+    \label{fig:summary}
+\end{figure}
+
+È l'insieme di tutte queste tecnolgie a rendere Monero una delle criptovaluta che tutelano maggiormente la privacy degli utenti e di conseguenza vengono preferite dai cybercriminali per il cryptojacking.
 
 \subsection{La blockchain di Monero}
 
-\subsubsection{RandomX}
+\subsubsection*{RandomX}
 RandomX è un algoritmo Proof-of-Work (PoW), questo algoritmo permette di
 estrarre dalle CPU un calcolo computazionale che permetta di eguagliare la
 velocità degli hardware specializzati. Abbiamo già anticipato nei capitoli
@@ -788,7 +862,7 @@ identificabile poichè porta ad un surriscaldamento anomalo del device.
 Per prevenire attacchi di cryptojacking, è fondamentale adottare una serie di
 misure di sicurezza e buone pratiche. Ecco alcune strategie efficaci:
 
-\subsubsection{Protezioni anti-malware}
+\subsubsection*{Protezioni anti-malware}
 Sarebbe una buona pratica proteggere i propri dispositivi con anti-malware
 capaci di rilevare processi di cryptomining in esecuzione in background, gestite
 le estensioni browser scaricate dagli utenti e minimizzare il rischio dato dalla
@@ -796,13 +870,13 @@ esecuzione di script malevoli eseguiti sui browser. Nel caso si dovesse
 proteggere un organizzione, sarebbe buona pratica andare a equipaggiare software
 del tipo sopracitato sia nei device endpoint che nei server.
 
-\subsubsection{Applicare patch di sicurezza e proteggere i server}
+\subsubsection*{Applicare patch di sicurezza e proteggere i server}
 Spesso gli hacker che puntano a creare un infrastruttura cryptojacking puntano a
 server esposti pubblicamennte con bassi livelli di protezione su cui caricare
 malware e da sfruttare per arrivare ad altri server. In questo caso, sarebbe
 utile andare ad applicare patch di sicurezza e disattivare servizi inutilizzati.
 
-\subsubsection{Utilizzare software SCA}
+\subsubsection*{Utilizzare software SCA}
 I software SCA\footnote{Software Composition Analysis} permettono di andare ad
 analizzare il software open-source e le sue dipendenze delle sue componenti.
 Questi sistemi sono molto utili in fase di sviluppo per andare a rilevare
@@ -817,7 +891,7 @@ Per quanto riguarda la rilevazione, siccome gli attacchi di cryptojacking sono
 sempre più sofisticati, è necessario adottare strategie di monitoraggio avanzate
 per individuare e contrastare tali minacce. Ecco alcune tecniche utili:
 
-\subsubsection{Addetrare il personale help-desk a riconoscere i sintomi del cryptojacking}
+\subsubsection*{Addetrare il personale help-desk a riconoscere i sintomi del cryptojacking}
 Nel ambito della grande distribuzione di device e/o software il personale
 help-desk è spesso il primo a ricevere segnalazioni di problemi relativi a
 prestazioni lente o surriscaldamento dei dispositivi. In questi casi, è
@@ -827,7 +901,7 @@ reparto IT. Il reparto IT, a sua volta, dovrà eseguire un'analisi approfondita
 per individuare possibili brecce nei propri servizi o device endpoint e
 rilascaire aggiornamenti di sicurezza.
 
-\subsubsection{Monitoraggio del traffico di rete}
+\subsubsection*{Monitoraggio del traffico di rete}
 Il monitoraggio del traffico di rete è un'ottima strategia per individuare
 attività sospette. Gli attacchi di cryptojacking, infatti, comportano un aumento
 del traffico di rete oltre che dell'utilizzo della CPU. Esistono vari strumenti
@@ -835,7 +909,7 @@ per monitorare il traffico di rete, come Wireshark, che consentono di
 identificare rapidamente eventuali attività malevole. Sarebbe utile avere filti
 nelle interfacce di rete per bloccare eventuali pacchetti non certificati. 
 
-\subsubsection{Sistemi di monitoraggio Cloud e sicurezza runtime dei container}
+\subsubsection*{Sistemi di monitoraggio Cloud e sicurezza runtime dei container}
 I fornitori di servizi cloud offrono strumenti di monitoraggio avanzati che
 consentono di individuare attività sospette, un esempio è quello di Google Cloud
 che ha modernizzato il \textit{Security Command Center: piattaforma di
@@ -845,7 +919,7 @@ Virtual Machine Threat Detection (VMTD). Questo sistema è in grado di protegger
 il cloud da attacchi informatici di vario genere e di individuare attività di
 cryptojacking.
 
-\subsubsection{Attuare il Threat hunting}
+\subsubsection*{Attuare il Threat hunting}
 Il threat hunting è eseguito da specialisti conosciuti come threat hunters, i
 quali sono incaricati di individuare, isolare e neutralizzare minacce
 informatiche avanzate. Questi professionisti si dedicano all'analisi di
@@ -860,7 +934,7 @@ individuare indirizi di compromissione e tentativi di attacco, impiegando
 tecniche di analisi comportamentale e informazioni derivate dall'intelligence
 sulle minacce.
 
-\subsubsection{Monitora i tuoi siti web}
+\subsubsection*{Monitora i tuoi siti web}
 I siti web sono spesso bersagli di attacchi di cryptojacking, poiché gli hacker
 possono inserire script malevoli nei siti web, non per colpire i server, ma per
 colpire i visitatori. Per monitorare i siti web, è possibile utilizzare
@@ -1117,6 +1191,9 @@ Cryptojacking Gang Tracked to Romania}, 14 Giugno 2021
 
 \bibitem{RandomX}
 tevador, \href{https://github.com/tevador/RandomX}{RandomX GitHub}
+
+\bibitem{RingCT}
+Shen Noether, Monero Research Labs, \href{https://eprint.iacr.org/2015/1098}{Ring Signature Confidential Transactions for Monero}, 2015
 
 \end{thebibliography}
 
