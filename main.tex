@@ -19,7 +19,7 @@
 \begin{center}
 {\LARGE{\bf Cryptojacking:} \\ 
 \vspace{3mm}
-{\bf quando il tuo Computer lavora per qaualcun altro.}}
+{\bf quando il tuo personal computer lavora per qaualcun altro.}}
 \end{center}
 \vspace{35mm}
 \par
@@ -53,19 +53,19 @@ Il Cryptojacking, in Italiano "Dirottamento di risorse", è una forma di attacco
 informatico che sfrutta la potenza di calcolo di un utente, senza che esso ne
 sia consapevole, per minare criptovalute. \cite{CSO}
 
-Gli Hacker hanno come obbiettivo quello di prendere il controllo del maggior
-numero possibile di sistemi con l'obbiettivo di minare quante più criptovalute,
-illecitamente. Questo sistema di hacking non punta unicamente la classica utenza
-di Personal Computer ma cerca di sfruttare anche le risorse di Server e
-infrastrutture Cloud e in generale ogni tipologia di macchine computazione con un
-accesso alla rete Internet.
+L'obbiettivo degli hacker è quello di prendere il controllo del maggior
+numero possibile di sistemi con l'obbiettivo di minare quante più criptovalute. Questo sistema di hacking non punta unicamente la classica utenza
+di Personal Computer ma cerca di sfruttare anche le risorse di Server,
+infrastrutture Cloud e in generale ogni tipologia di macchina computazionale con un accesso alla rete Internet.
 
 La caratteristica fondamentale di questo malware è far sì che la vittima sia
-ignara dei processi in background, che si occupano di minare, e permettergli di
-usare la propria macchina normalmente. Ovviamente, il tutto, a discapito di un
-sovraccarico della macchina e conseguente surriscaldamento, presenza di lag,
-maggior consumo elettrico (che nel caso di servizi Server o Cloud porta ad avere
-fatture particolarmente elevate) e riduzione delle performance generali.
+ignara dei processi in background, i quali effettuano il mining, e
+permettergli di usare la propria macchina normalmente. Ovviamente, il tutto, a
+discapito di un sovraccarico della macchina e conseguente surriscaldamento,
+presenza di lag, maggior consumo elettrico (che nel caso di servizi Server o
+Cloud porta ad avere fatture particolarmente elevate) e riduzione delle
+performance generali. È nelle skills del cyber-criminale riuscire a mantenere 
+questi effetti collaterali il più nascosti possibile se vuole mantenere il controllo della macchina per il maggior tempo possibile.
 
 Questo paper si propone di analizzare il fenomeno del cryptojacking, i metodi di
 attacco, le tecnologie coinvolte e i relativi aspetti tecnici per poi esporre le
@@ -78,8 +78,8 @@ sostituito CryptoNight), utilizzato per minare Monero.
 \subsection{Storia}
 
 Una delle prime forme di cryptojacking è stata scoperta nel Giugno 2011, quando
-l'azienda Symantec Corporation iniziò a sospettare che le botnet \footnote{ Una
-botnet è un gruppo di dispositivi connessi a Internet , ognuno dei quali esegue
+l'azienda Symantec Corporation iniziò a sospettare che le botnet \footnote{Una
+botnet è un gruppo di dispositivi connessi a Internet, ognuno dei quali esegue
 uno o più bot . Le botnet possono essere utilizzate per eseguire attacchi DDoS (
 distributed denial-of-service ), rubare dati, [1] inviare spam e consentire
 all'aggressore di accedere al dispositivo e alla sua connessione. Il
@@ -91,17 +91,18 @@ malevola.\footnote{\href{https://arc.net/l/quote/ftyxgxms}{Botnet, Wikipedia}}}
 potessero minare Bitcoin segretamente, sebbene la GPU di una sola macchina
 impiegherebbe molto tempo per minare una transizione in criptovalute,
 utilizzando una grande quantità di macchine si riesce a suddividere il lavoro e
-ridurre il tempo.
+di conseguenza ridurre il tempo.
 
-Una serie di attacchi rilevanti di cryptojacking sono stati scoperti dal 2011 al
-2021. L'ultimo è relativo al "2021 Microsoft Exchange Server data breach"
+Una serie di attacchi rilevanti di cryptojacking sono stati scoperti dal 2011
+(come quello sopra citato) al 2021. L'ultimo è relativo al "2021 Microsoft
+Exchange Server data breach"
 \footnote{\href{https://arc.net/l/quote/golshtco}{2021 Microsoft Exchange Server
 data breach, Wikipedia}}, tale breccia, creata nel Gennaio 2021 ha permesso
 numerosi attacchi tra qui diversi di tipo cryptojacking.
 
 Il cryptojacking è emerso come una minaccia significativa nel campo della
 cybersecurity intorno al 2017, con l'introduzione di Coinhive, dismesso poi a
-Marzo 2019 era un servizio di mining di criptovalute attraverso i browser web,
+Marzo 2019, era un servizio di mining di criptovalute attraverso i browser web 
 che andava a utilizzare parte o tutta la potenza di calcolo per minare
 criptovalute Monero (approfondimento nella sezione
 \hyperref[sec:aspetti_tecnici]{"Aspetti Tecnici"}). 
@@ -139,15 +140,14 @@ calcolato consumo energetico.
 
 \section{Come funziona}
 Il mining è il processo che Bitcoin e altre criptovalute utilizzano per coniare
-virtualmente nuove monete digitali e certificare le transazioni delle stesse
-monete. Di base, il mining, è un processo lecito se venisse computato su macchine 
-proprie.
+virtualmente nuove monete digitali e certificare le transazioni effettuate dagli
+utenti usando le stesse monete. Il mining è un processo lecito ed incentivato dal sistema stesso delle crypto-valute ma lo rimane fintanto che il processo è effettuato su macchine di proprietà dell'utente o su macchine sulle quali l'utente ha il permesso di eseguire questo tipo di operazioni.
 
 Nel dettaglio troviamo vaste reti decentralizzate di computer in tutto il mondo
 che verificano e proteggono le blockchain, ovvero i registri virtuali che
 documentano le transazioni di criptovalute. In cambio del contributo della loro
-potenza di elaborazione, l'utente del computer della rete che per primo risolve
-i calcoli complessi dovuti alla certificazione della transizione viene premiato
+potenza di elaborazione, l'utente del computer della rete, che per primo risolve
+i calcoli complessi dovuti alla certificazione della transizione, viene premiato
 con nuove monete. Si tratta di un circolo virtuoso: i minatori mantengono e
 tutelano la blockchain, la blockchain assegna le monete, le monete fungono da
 incentivo ai minatori per continuare a mantenere la blockchain. Il mining non è
@@ -157,10 +157,9 @@ suoi utenti. Il mining è un processo che richiede molta potenza di calcolo con
 un effort inversamente proporzionale al mining effettuato portando così ad un
 aumento della difficoltà di mining e ad una conseguente crescita dei costi.
 
-Il cryptojacking sfrutta questo processo, ma in modo illecito. Gli hacker
-inseriscono codice malevolo nei siti web o nei messaggi di posta elettronica che
-infettano i computer delle vittime e li trasformano in macchine per il mining
-riducendo i costi e aumentando i guadagni.
+Il cryptojacking sfrutta questo processo. Gli hacker inseriscono codice malevolo
+nei siti web o nei messaggi di posta elettronica che infettano i computer delle
+vittime e li trasformano in macchine per il mining riducendo i costi e di conseguenza aumentando i profitti. Questo processo, banalmente, è molto più redditizio rispetto al mining legale poiché non si devono sostenere i costi di hardware elettronico e di energia elettrica.
 
 \newpage
 
@@ -173,12 +172,13 @@ Attaccare uno o più PC è il classico metodo per creare un sistema di
 cryptojacking. Tipicamente l'hacker riesce ad iniettare il suo software di
 mining all'interno della macchina usando tecniche come:
 \begin{itemize}
-    \item \textbf{Fileless malware}: possono essere di 2 tipologie:
+    \item \textbf{Fileless malware}: che a loro volta possono essere di 2 tipologie:
     \begin{itemize}
-        \item \textit{Fully Fileless Malware}: non esegue nessun file sul disco
-        ma tutte le attività possono essere osservate in memoria. Gli hacker
-        possono anche, attraverso la rete, inivare pacchetti malevoli che
-        installano backdoor che risiedono nella memoria kernel.
+        \item \textit{Fully Fileless Malware}: non viene eseguito nessun file
+        sul disco rigido ma tutte le attività possono essere osservate mentre
+        sono in esecuzione in memoria. Gli hacker possono anche, attraverso la
+        rete, inivare pacchetti malevoli che installano backdoor che risiedono
+        nella memoria kernel.
         \item \textit{Fileless Malware with Indirect File Activity}: non scrive
         direttamente i file sul disco, ma gli autori della iniezzione possono
         installare un comando PowerShell all'interno del repository WMI
@@ -190,13 +190,14 @@ mining all'interno della macchina usando tecniche come:
     \end{itemize}
     \item \textbf{Schemi di phishing}: è il modo più semplice con cui gli
         aggressori di cryptojacking possono rubare risorse è inviare agli utenti
-        un'e-mail dall'aspetto legittimo che li incoraggi a fare clic su un
-        collegamento che esegue il codice per inserire uno script di
-        cryptomining sul proprio computer. Funziona in background e invia i
-        risultati tramite un'infrastruttura di comando e controllo
-        (C2\footnote{Command and Control Infrastructure: anche conosciuto come
-        C\&C o C2 è il set di strumenti e tecniche che un un hacker utilizza per
-        mantenere la commuicazione con il computer precedentemente compresso.}).
+        un'e-mail dall'aspetto legittimo o innoquo che li incoraggi ad acccedere
+        ad un collegamento dannoso. Questo collegamenteo esegue il codice per
+        inserire uno script di cryptomining sul computer della vittima. Funziona
+        in background e invia i risultati tramite un'infrastruttura di comando e
+        controllo (C2\footnote{Command and Control Infrastructure: anche
+        conosciuto come C\&C o C2 è il set di strumenti e tecniche che un un
+        hacker utilizza per mantenere la commuicazione con il computer
+        precedentemente compresso.}).
     \item \textbf{Embedded di script malevoli al interno di siti o web app}: gli
         hacker possono sfruttare script all'interno dei siti, che eseguiti
         automaticamente dai browser, minano le cripto valute. Questo metodo è
@@ -206,32 +207,33 @@ mining all'interno della macchina usando tecniche come:
 
 \subsection{Cercare server e dispositivi di rete vulnerabili}
 I server sono un obiettivo molto ambito per gli hacker, in quanto sono
-dispositivi molto potenti e spesso connessi a Internet 24/7. Gli hacker possono
-sfruttare vulnerabilità come Log4J\footnote{"La vulnerabilità Log4j, conosciuta
-anche come Log4Shell, è una vulnerabilità critica scoperta nella libreria di
-registrazione Apache Log4j nel novembre del 2021. Sostanzialmente, Log4Shell
-concede agli hacker il controllo totale dei dispositivi eseguendo versioni di
-Log4j senza patch." - \href{https://arc.net/l/quote/zjujxamu}{IBM}} per
-iniettare i propri sistemi di cryptojacking in queste potenti macchine. Spesso i
-server compromessi vengono anche utilizzi come ponti per accedere con maggior
-semplicità ad altri dispositivi per eseguire attacchi più complessi ed
+dispositivi estremamente potenti e spesso connessi a Internet 24/7. Gli hacker
+possono sfruttare vulnerabilità come Log4J\footnote{"La vulnerabilità Log4j,
+conosciuta anche come Log4Shell, è una vulnerabilità critica scoperta nella
+libreria di registrazione Apache Log4j nel novembre del 2021. Sostanzialmente,
+Log4Shell concede agli hacker il controllo totale dei dispositivi eseguendo
+versioni di Log4j senza patch." - \href{https://arc.net/l/quote/zjujxamu}{IBM}}
+per iniettare i propri sistemi di cryptojacking in queste potenti macchine.
+Spesso i server compromessi vengono anche utilizzi come ponti per accedere con
+maggior semplicità ad altri dispositivi per eseguire attacchi più complessi ed
 orizzontali.
 
 \subsection{Attaccare il sistema di produzione di software}
 Un altro metodo molto comune è quello di attaccare le macchine è seminare
-repository open-souce nelle quali è stato iniettato il loro codice malevolo.
-Grazie ai programmatori che utilizzano questi codici è possibile per gli hacker
+repository open-souce nelle quali è stato iniettato codice malevolo. Grazie ai
+programmatori che utilizzano questi codici è possibile per gli hacker
 raggiungere un numero elevato di macchine e scalare velocemente il loro sistema
 di mining. Una volta entrati nella macchina del programmatore, possono cercare
-di accedere anche ai server, ai dispositivi di rete oppure ai servizi cloud ai
-quali esso è connesso. In alternativa possono puntare a sub-iniettare questi
-script all'interno dei progetti che i programmatori stanno sviluppando.
+di accedere anche ai server (ai quali spesso un programmatore è connesso per
+lavoro), ai dispositivi di rete oppure ai servizi cloud ai quali esso è
+connesso. In alternativa possono puntare a sub-iniettare questi script
+all'interno dei progetti che i programmatori stanno sviluppando.
 
 \subsection{Fare leva sulle infrastrutture cloud}
 Come per i server, anche le infrastrutture cloud sono un obbiettivo molto ambito
 poiché permettono di effettuare computazioni ancora più veloci. Uno dei metodi
 più comuni per farlo è scansionare le API dei container esposti e utilizzare
-tale accesso per avviare il caricamento del software di mining sulle istanze dei
+tale accesso caricare del software di mining sulle istanze dei
 container o sui server cloud interessati. L'attacco è in genere automatizzato
 con un software di scansione che cerca server accessibili alla rete Internet
 pubblica con API esposte o che permettono l'accesso senza autenticazione. Come
@@ -251,16 +253,15 @@ utilizzate per il cryptojacking.
 
 La criptovaluta Monero, inizialmente nota come BitMonero, è stata creata
 nell'aprile 2014 come deriva della valuta proof-of-concept CryptoNote. Monero
-significa "denaro" nella lingua esperanto. Monero è , grazie alle sue features,
-una delle criptovalute più popolari per il mining.
+significa "denaro" nella lingua Esperanto. Monero è, grazie alle sue features, una delle criptovalute più popolari per il mining.
 
 Una delle filosofie di Monero è quella di mantenere un mining egualitario, in
 modo che tutti possano avere la possibilità di fare mining. Per raggiungere
 questo obiettivo, utilizza un algoritmo particolare ideato e sviluppato dai
-membri della community della criptovaluta: RandomX . Questo algoritmo PoW è
-resistente agli ASIC, il che rende impossibile costruire hardware specializzato
-per fare mining di Monero. I miner sono obbligati ad utilizzare hardware di
-livello consumer e competere lealmente.
+membri della community della criptovaluta: RandomX. Questo algoritmo PoW
+\footnote{Proof of Work} è resistente agli ASIC, il che rende impossibile
+costruire hardware specializzato per fare mining di Monero. I miner sono
+obbligati ad utilizzare hardware di livello consumer (cioè i semplici personal computer o dispositivi simili di carattere personale) e competere lealmente.
 
 \subsection{Fondamentali}
 Le curve ellittiche sono la funzione matematica che sta alla base della
@@ -290,7 +291,7 @@ $$ -5 \mod{3} = 1 \qquad \text{oppure} \qquad 4 \mod 3 = 1 $$
 Formalmente possiamo definire l'equazione $ c = a \mod{b} $ come $ a = bx + c $
 dove $ x $ è il quoziente e $ c $ è il resto di $ a \mod b $.
 
-Ne seguono alcune proprietà che verranno definite in seguito.
+Ne seguono alcune proprietà che verranno definite in seguito ma è fondamentale capire che questo tipo di calcoli, su numeri a decine di migliaia di cifre, per un calcolatore sono di una difficoltà computazionale molto alta.
 
 \subsubsection{Curve Ellittiche}
 Definiamo una curva ellittica $ E $ su un campo finito $ F_p $ dove $ p $ è un
@@ -327,10 +328,10 @@ Ed25519, di cui parleremo più avanti.
 Il protocollo di scambio di chiavi Diffie-Hellman (DH), inventato nel 1976, nato
 dalla collaborazione dei ricercatori Whitfield Diffie e Martin Hellman, è il
 primo protocollo a permettere a 2 parti di communicare attraverso un canale
-insicuro senza necessità di condiversi una chiave segreta previa commuicazione.
-Vennero così introdotti i cifrari a chaive pubblica. Matematicamente, il
-protocollo DH si basa sul problema della fattorizzazione e sul problema del
-logaritmo discreto nell'algebra modulare.
+insicuro senza necessità di condividersi una chiave segreta previa
+commuicazione. Questo tipo di scambia è quello che comuneemente viene definito dai "cifrari a chiave pubblica".
+Matematicamente, il protocollo D.H. si basa sul problema della fattorizzazione e
+sul problema del logaritmo discreto nell'algebra modulare di cui abbiamo parlato nel paragrafo precedente.
 
 Definiamo $ p $ un numero reale random tale che $0 < k < l$ che chiameremo
 \textit{private key} e calcoliamo la relativa \textit{public key} $ P = k \cdot
@@ -428,9 +429,9 @@ conseguenza, qualsiasi punto in Ed25519 potrebbe essere espresso utilizzando 64
 byte poichè includono sia una rappresentazione del punto $ R $ che un valore
 scalare $ S $ derivato da una computazione su una funzione di hash $ H $:
 $$ S = (H + \textit{private key} \times H) \mod l $$ Applicando le tecniche di
-point compression, descritte di seguito, tuttavia, è possibile ridurre questa
+Point Compression, descritte di seguito, tuttavia, è possibile ridurre questa
 quantità della metà, a 32 byte utilizzando tecniche di "Point Compression"
-\footnote{ Le tecniche di point compression (compressione dei punti) sono metodi
+\footnote{Le tecniche di point compression (compressione dei punti) sono metodi
 utilizzati in crittografia ellittica per ridurre la quantità di dati necessari
 per rappresentare un punto su una curva ellittica. Questo è particolarmente
 utile per ridurre l'uso di memoria e banda, specialmente in applicazioni che
@@ -443,23 +444,23 @@ sofisticato utilizzando più chiavi. Questo è il caso dello schema Multi Layer
 Linkable Spontaneous Anonymous (MLSAG), uno schema di firma che permette a più
 utenti di firmare un messaggio in modo anonimo. 
 
-È spesso vantaggioso dimostrare che la stessa chiave privata è stata utilizzata
-per generare chiavi pubbliche su basi diverse. Per esempio, consideriamo una
-chiave pubblica standard $kG$ e un segreto condiviso di Diffie-Hellman $kR$ con
-la chiave pubblica di un'altra persona, dove le basi sono rispettivamente $G$ e
-$R$. In questo contesto, possiamo dimostrare la conoscenza del logaritmo
-discreto $k$ relativo a $kG$, provare la conoscenza di $k$ in $kR$, e confermare
-che $k$ è identico in entrambe le situazioni, senza tuttavia rivelare il valore
-di $k$.
+Può essere vantaggioso dimostrare che la stessa chiave privata è stata
+utilizzata per generare chiavi pubbliche su basi diverse. Per esempio,
+consideriamo una chiave pubblica standard $kG$ e un segreto condiviso di
+Diffie-Hellman $kR$ con la chiave pubblica di un'altra persona, dove le basi
+sono rispettivamente $G$ e $R$. In questo contesto, possiamo dimostrare la
+conoscenza del logaritmo discreto $k$ relativo a $kG$, provare la conoscenza di
+$k$ in $kR$, e confermare che $k$ è identico in entrambe le situazioni, senza
+tuttavia rivelare il valore di $k$.
 
 È possibile trovare una \textit{Non-interactive proof\footnote{}} a pagina 25
 del white paper di Monero \cite{Zero To Monero}.
 
-Chiamiamo Non-Interactive Proof è un metodo crittografico in cui una parte (il
+Chiamiamo Non-Interactive Proof un metodo crittografico in cui una parte (il
 provatore) può dimostrare a un'altra parte (il verificatore) che una certa
 affermazione è vera senza interagire direttamente con il verificatore durante il
-processo di prova, diversamente dal tradizionale \textit{Zero-knowledge proofs}
-che necessità di una interazione tra le parti simultanea.
+processo di prova, diversamente da \textit{Zero-Knowledge proofs} che necessità
+di una interazione tra le parti simultanea.
 
 \subsection{Privacy in Monero}
 Monero può essere estratto sia da CPU che da GPU, ma la prima è molto più
@@ -479,7 +480,7 @@ anonimato, le feature più rilevanti sono: One Time Address, Amount Hiding e Rin
 In tutte le blockchain, per ogni utente viene generato un indirizzo, questo è
 tutto ciò che serve per ricevere pagamenti. Poichè il libro mastro è pubblico,
 tutti possono vedere gli indirizzi e le transizioni e si può facilmente
-comprendere per ogni indirizzo l'ammontare di cripto valuta che possiede.
+comprendere per ogni indirizzo l'ammontare di criptovaluta che possiede.
 
 Un indirizzo Monero è una stringa di 95 caratteri alfanumerici che inizia con
 \textit{4} per gli indirizzi standard e \textit{8} per gli indirizzi
@@ -535,15 +536,16 @@ Parafrasando Butrin\footnote{Vitalik Buterin, co-fondatore di Etherium}:
     alle parti che effettuano la transazione. - Buterin \cite{Buterin Quote}
 \end{quote}
 
-Questi One-time address sono anche detti Stealth Address. Il team di Buterin ha
-progettato un sistema di indirizzi nascosti (anche detto SAP \footnote{Stealth
-Address Protocol}) chiamato BaseSAP. Il protocollo mira a fornire un meccanismo
-leggero che consenta agli utenti di generare indirizzi temporanei, mantenendo la
-completa compatibilità con le versioni precedenti e non richiedendo modifiche
-alla blockchain principale. BaseSAP è basato sul cifrario assimetrico su curve
-ellittiche Secp256k1, migliorato attraverso l'integrazione di "tags di
-visualizzazione" utili a rendere più efficiente l'analisi rispetto ai comuni
-DKSAPs \footnote{Dual-Key Stealth Address Protocols}.
+Questi One-time address sono anche detti \textbf{Stealth Address}. Il team di
+Buterin ha progettato un sistema di indirizzi nascosti (anche detto SAP
+\footnote{Stealth Address Protocol}) chiamato BaseSAP. Il protocollo mira a
+fornire un meccanismo leggero che consenta agli utenti di generare indirizzi
+temporanei, mantenendo la completa compatibilità con le versioni precedenti e
+non richiedendo modifiche alla blockchain principale. BaseSAP è basato sul
+cifrario assimetrico su curve ellittiche Secp256k1, migliorato attraverso
+l'integrazione di "tags di visualizzazione" utili a rendere più efficiente
+l'analisi rispetto ai comuni DKSAPs \footnote{Dual-Key Stealth Address
+Protocols}.
 
 Questo protocolli sono la base per le implementazioni DKSAP usate in Monero. Da
 quando DKSAP è nato, ha portato molti ricercatori a studiare e trovare nuovi
@@ -551,10 +553,12 @@ modi per migliorarlo:
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.95\textwidth]{./images/sommario.png}
+    \includegraphics[width=0.79\textwidth]{./images/sommario.png}
     \caption{Sommario dei lavori di ricerca sulle Stealth Address e compatibilità BaseSAP}
     \label{fig:summary}
-\end{figure}l
+\end{figure}
+
+\paragraph{Esempio pratico di One-time address}
 
 \begin{enumerate}
     \item Alice genera una reale random $r \in \mathbf{Z}l $ e calcola il
