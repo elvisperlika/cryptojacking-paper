@@ -54,7 +54,7 @@ informatico che sfrutta la potenza di calcolo di un utente, senza che esso ne
 sia consapevole, per minare criptovalute. \cite{CSO}
 
 L'obbiettivo degli hacker è quello di prendere il controllo del maggior
-numero possibile di sistemi con l'obbiettivo di minare quante più criptovalute. Questo sistema di hacking non punta unicamente la classica utenza
+numero possibile di sistemi al fine di minare quante più criptovalute. Questo sistema di hacking non punta unicamente la classica utenza
 di Personal Computer ma cerca di sfruttare anche le risorse di Server,
 infrastrutture Cloud e in generale ogni tipologia di macchina computazionale con un accesso alla rete Internet.
 
@@ -98,11 +98,11 @@ Una serie di attacchi rilevanti di cryptojacking sono stati scoperti dal 2011
 Exchange Server data breach"
 \footnote{\href{https://arc.net/l/quote/golshtco}{2021 Microsoft Exchange Server
 data breach, Wikipedia}}, tale breccia, creata nel Gennaio 2021 ha permesso
-numerosi attacchi tra qui diversi di tipo cryptojacking.
+numerosi attacchi tra i quali, diversi di tipo cryptojacking.
 
 Il cryptojacking è emerso come una minaccia significativa nel campo della
 cybersecurity intorno al 2017, con l'introduzione di Coinhive, dismesso poi a
-Marzo 2019, era un servizio di mining di criptovalute attraverso i browser web 
+Marzo 2019. Si trattava di un servizio di mining di criptovalute attraverso i browser web 
 che andava a utilizzare parte o tutta la potenza di calcolo per minare
 criptovalute Monero (approfondimento nella sezione
 \hyperref[sec:aspetti_tecnici]{"Aspetti Tecnici"}). 
@@ -118,11 +118,10 @@ parte tecnica si tornerà ad approfondire il perché Monero ed il cryptojacking
 siano così popolari, come individuare questo tipo di malware e come prevenire
 l'infiltrazione degli stessi nei nostri sistemi. In coda verranno presentati dei
 casi reali, nei quali vengo spiegati i passi che i cybercriminali hanno seguito
-per colpire alcune grandi realtà tecnologiche. L'ultimo capitolo è dedicato alla
-bibliografia.
+per colpire alcune grandi realtà tecnologiche.
 
 \subsection{Problema e Motivazione}
-Questo documento punta a fornire al lettore una maggiore comprensione del mondo
+Questo documento punta a fornire ai lettori una maggiore comprensione del mondo
 delle criptovalute e di come queste possono portare alcuni soggetti a compiere
 atti criminali allo scopo di arricchirsi con esse. Si vuole formire ai lettori
 le armi per comprendere se la propria macchina o quella, ad esempio aziendale,
@@ -146,7 +145,7 @@ utenti usando le stesse monete. Il mining è un processo lecito ed incentivato d
 Nel dettaglio troviamo vaste reti decentralizzate di computer in tutto il mondo
 che verificano e proteggono le blockchain, ovvero i registri virtuali che
 documentano le transazioni di criptovalute. In cambio del contributo della loro
-potenza di elaborazione, l'utente del computer della rete, che per primo risolve
+potenza di elaborazione l'utente del computer della rete, che per primo risolve
 i calcoli complessi dovuti alla certificazione della transizione, viene premiato
 con nuove monete. Si tratta di un circolo virtuoso: i minatori mantengono e
 tutelano la blockchain, la blockchain assegna le monete, le monete fungono da
@@ -157,7 +156,7 @@ suoi utenti. Il mining è un processo che richiede molta potenza di calcolo con
 un effort inversamente proporzionale al mining effettuato portando così ad un
 aumento della difficoltà di mining e ad una conseguente crescita dei costi.
 
-Il cryptojacking sfrutta questo processo. Gli hacker inseriscono codice malevolo
+Il cryptojacking sfrutta questo processo. Gli hacker inseriscono il codice malevolo
 nei siti web o nei messaggi di posta elettronica che infettano i computer delle
 vittime e li trasformano in macchine per il mining riducendo i costi e di conseguenza aumentando i profitti. Questo processo, banalmente, è molto più redditizio rispetto al mining legale poiché non si devono sostenere i costi di hardware elettronico e di energia elettrica.
 
@@ -188,17 +187,16 @@ mining all'interno della macchina usando tecniche come:
         Microsoft [34], "l'oggetto WMI è un contenitore di dati multiuso che non
         può essere rilevato e rimosso".\cite{FMW}
     \end{itemize}
-    \item \textbf{Schemi di phishing}: è il modo più semplice con cui gli
+    \item \textbf{Schemi di phishing}: il modo più semplice con cui gli
         aggressori di cryptojacking possono rubare risorse è inviare agli utenti
         un'e-mail dall'aspetto legittimo o innoquo che li incoraggi ad acccedere
-        ad un collegamento dannoso. Questo collegamenteo esegue il codice per
+        ad un collegamento dannoso. Questo collegamento esegue il codice per
         inserire uno script di cryptomining sul computer della vittima. Funziona
         in background e invia i risultati tramite un'infrastruttura di comando e
         controllo (C2\footnote{Command and Control Infrastructure: anche
-        conosciuto come C\&C o C2 è il set di strumenti e tecniche che un un
-        hacker utilizza per mantenere la commuicazione con il computer
+        conosciuto come C\&C o C2 è il set di strumenti e tecniche che un hacker utilizza per mantenere la commuicazione con il computer
         precedentemente compresso.}).
-    \item \textbf{Embedded di script malevoli al interno di siti o web app}: gli
+    \item \textbf{Embedded di script malevoli all'interno di siti o web app}: gli
         hacker possono sfruttare script all'interno dei siti, che eseguiti
         automaticamente dai browser, minano le cripto valute. Questo metodo è
         molto più diffuso e meno invasivo rispetto ai precedenti, poiché non
@@ -219,7 +217,7 @@ maggior semplicità ad altri dispositivi per eseguire attacchi più complessi ed
 orizzontali.
 
 \subsection{Attaccare il sistema di produzione di software}
-Un altro metodo molto comune è quello di attaccare le macchine è seminare
+Un altro metodo molto comune è quello di attaccare le macchine e seminare
 repository open-souce nelle quali è stato iniettato codice malevolo. Grazie ai
 programmatori che utilizzano questi codici è possibile per gli hacker
 raggiungere un numero elevato di macchine e scalare velocemente il loro sistema
@@ -232,8 +230,8 @@ all'interno dei progetti che i programmatori stanno sviluppando.
 \subsection{Fare leva sulle infrastrutture cloud}
 Come per i server, anche le infrastrutture cloud sono un obbiettivo molto ambito
 poiché permettono di effettuare computazioni ancora più veloci. Uno dei metodi
-più comuni per farlo è scansionare le API dei container esposti e utilizzare
-tale accesso caricare del software di mining sulle istanze dei
+più comuni per farlo è scansionare le API dei container esposti ed utilizzare
+tale accesso per caricare il software di mining sulle istanze dei
 container o sui server cloud interessati. L'attacco è in genere automatizzato
 con un software di scansione che cerca server accessibili alla rete Internet
 pubblica con API esposte o che permettono l'accesso senza autenticazione. Come
@@ -241,7 +239,7 @@ per i server, gli aggressori sfruttano il cloud service violato ed attraverso lo
 stesso puntano a raggiungere altre infrastrutture simili. Questi sono gli
 attacchi più redditizi. \\
 L'aspetto rilevante, in tutti gli approcci sopra citati, è che gli hacker
-vogliono e possano accedere a quante più macchine computazionali.
+vogliono ed hanno il potere di accedere a quante più macchine computazionali.
 
 \newpage 
 
@@ -283,7 +281,7 @@ e non 13:00. Questo perché l'orologio è un sistema di 12 ore, quindi il modulo
 12; questo è il motivo per cui viene chiamata \textit{aritmetica dell'orologio}.
 
 Diciamo che per calcoalre $ c = a \mod{b} $ possiamo immaginare un asse di
-numeri interi e posizionarci si $ a $ e 'saltare' con passi di lunghezza $ b $
+numeri interi e posizionarci nel punto $ a $ e 'saltare' con passi di lunghezza $ b $
 fino a raggiungere un valore intero che sia $ \ge 0 $ e $ < b $, questo sarà il
 nostro $ c $. Ad esempio:
 $$ -5 \mod{3} = 1 \qquad \text{oppure} \qquad 4 \mod 3 = 1 $$
@@ -303,7 +301,7 @@ in cui $ a $ e $ b $ sono i parametri della curva che ne defiscono la forma e la
 posizione. Le coordinate $ (x,y) $ sulla curva ellittica che possono prendere
 qualsiasi valore all'interno di $F_p$ formano un Gruppo Abeliano \footnote{Un
 gruppo abeliano è un gruppo in cui l'operazione beneficia della proprietà
-commutativa È anche detto: Gruppo Commutativo}. Questo particolare gruppo ci
+commutativa è anche detto: Gruppo Commutativo}. Questo particolare gruppo ci
 permette, scegliamo 2 punti $ P $ e $ Q $ sulla curva che useremo per risolvere
 $ R $ andando a eseguire l'operazione di somma $ P + Q = R $ con $ R $ che sarà
 un altro punto sulla curva.
@@ -319,17 +317,17 @@ $$ p = 2^{256} - 2^{32} \underbrace{- 2^9 - 2^8 - 2^7 - 2^6 - 2^4 - 1}_{-977}
 $$.
 
 Questa curva è la base per la crittografia di Bitcoin e altre criptovalute.
-Questa funzione possiede diverse qualità tali che è stata applicata, non solo
-nel abito delle criptovalute, ma anche in altri campi per rendere le
-commuicazione sicure; come quello del IoT. Monero, invece, utilizza la curva
-Ed25519, di cui parleremo più avanti.
+Questa funzione possiede diverse qualità che le hanno permesso di essere
+applicata, non solo nel abito delle criptovalute, ma anche in altri campi per
+rendere le commuicazione sicure; come quello del IoT. Monero, invece, utilizza
+la curva Ed25519, di cui parleremo più avanti.
 
 \subsection{Scambio di chiavi Diffie-Hellman con curve ellittiche}
 Il protocollo di scambio di chiavi Diffie-Hellman (DH), inventato nel 1976, nato
 dalla collaborazione dei ricercatori Whitfield Diffie e Martin Hellman, è il
 primo protocollo a permettere a 2 parti di communicare attraverso un canale
 insicuro senza necessità di condividersi una chiave segreta previa
-commuicazione. Questo tipo di scambia è quello che comuneemente viene definito dai "cifrari a chiave pubblica".
+commuicazione. Questo tipo di scambia è quello che comunemente viene definito dai "cifrari a chiave pubblica".
 Matematicamente, il protocollo D.H. si basa sul problema della fattorizzazione e
 sul problema del logaritmo discreto nell'algebra modulare di cui abbiamo parlato nel paragrafo precedente.
 
@@ -361,7 +359,7 @@ avviene nel seguente modo:
 In crittografia, per Shnorr Signature si intende l'algoritmo di firma digitale
 ideato da Clauss Schnorr nel 1989. È uno dei primi protocolli basati sulla
 \textbf{impraticibiltà} nel risolvere il problema del logaritmo discreto, la sua
-funzione è permette di dimostrare ad una delle 2 parti in comunicazione di
+funzione permette di dimostrare ad una delle 2 parti in comunicazione di
 conoscere la chiave privata relativa a quella pubblica senza rivelare, appunto,
 quella privata. Questo algoritmo ci sarà utile per quando tratteremo le Ring Confidential Transactions relative alle Ring Signatures di Monero.
 
@@ -501,7 +499,7 @@ un nome di dominio, (ad esempio: donate.getmonero.org).
 
 Monero, diveresamente da altre cripto valute come BitCoin, utilizza nella
 transazione due coppie di chiavi private/pubbliche: $(k^v, K^v)$ e $(k^s, K^s)$.
-La seconda coppia è l'indirizzo del utente, mentre la prima è la corrispondente
+La seconda coppia è l'indirizzo dell' utente, mentre la prima è la corrispondente
 chiave privata. Indichiamo con $k^v$ le \textit{view key} e con $k^s$ la
 \textit{spend key}.
 
@@ -546,7 +544,7 @@ l'integrazione di "tags di visualizzazione" utili a rendere più efficiente
 l'analisi rispetto ai comuni DKSAPs \footnote{Dual-Key Stealth Address
 Protocols}.
 
-Questo protocolli sono la base per le implementazioni DKSAP usate in Monero. Da
+Questi protocolli sono la base per le implementazioni DKSAP usate in Monero. Da
 quando DKSAP è nato, ha portato molti ricercatori a studiare e trovare nuovi
 modi per migliorarlo:
 
@@ -565,8 +563,8 @@ modi per migliorarlo:
     $K^{o}$ come l'indirizzo di Bob, al quale specifica l'importo di 10 Monero
     ed il valore $rG$ e pubblica il tutto sulla blockchain.
     \item Bob, una volta ricevuti i dati, calcola $k^v_BrG = rK^v_B$ e calcola
-    ${K'}^s = K^o - \mathcal{H}_n(rK^v_B)G$. Una volta che ha ha compreso se
-    $K'^s = K^s$ comprendo che l'outout è per lui.
+    ${K'}^s = K^o - \mathcal{H}_n(rK^v_B)G$. Una volta vdeerificato che
+    $K'^s = K^s$ comprendo che l'output è per lui.
     \item una volta che Bob avrà confermato che l'output è per lui utilizzando
     la sua \textit{view key}, potrà firmare un messaggio con la sua
     \textit{spend key} e inviarlo alla rete per dimostrare di essere Bob e
@@ -612,7 +610,7 @@ ad eseguire una transazione di un certo valore senza rivelare il valore stesso.
 \paragraph{Esempio pratico di Commitements}
 
 In un gioco del lancio della moneta, Alice può chiamare una faccia
-("impegnadosi" così a voler ottenere quella una volta effettuato il lancio da Bob) ma va ad applicare una maschera (un hashing) sul "impegno preso" che annuncerà in pubblico senza che nessuno lo possa comprendere. A questo punto Bob lancia la moneta e mentre la moneta è in volo, Alice rivela l'impegno mascherato (annuncia quale moneta si aspetta di ricevere) e Bob rivela il risultato del lancio. Se Alice ha indovinato, Bob le darà la moneta.
+("impegnadosi" così a voler ottenere quella una volta effettuato il lancio da Bob) ma va ad applicare una maschera (un hashing) sull' "impegno preso" che annuncerà in pubblico senza che nessuno lo possa comprendere. A questo punto Bob lancia la moneta e mentre la moneta è in volo, Alice rivela l'impegno mascherato (annuncia quale moneta si aspetta di ricevere) e Bob rivela il risultato del lancio. Se Alice ha indovinato, Bob le darà la moneta.
 
 \paragraph{Amount Commitements} Nel caso di Monero, più nel dettaglio, si utilizzano i \textbf{Pedersen Commitements}. Questi hanno la peculiarità di essere definiti da una funzione che rispetta le caratteristiche delle Applicazioni Lineari; quindi una Applicazione Lineare.
 
@@ -637,7 +635,7 @@ Per effettuare questo tipo di comunicazione, Monero utilizza un sistema Diffie-H
 Una transazione Monero è composta anche da riferiemti ad altre transizioni. 
 
 \paragraph{Ring Signature}
-Le Ring Signature (in italiano: Firma ad Anello) sono un tipo di firma digitale la quale permette ad un utente di firmare un messaggio a nome di un gruppo di utenti senza che sia rivelata l'identità del utente che ha eseguito la firma.
+Le Ring Signature (in italiano: Firma ad Anello) sono un tipo di firma digitale la quale permette ad un utente di firmare un messaggio a nome di un gruppo di utenti senza che sia rivelata l'identità dell' utente che ha eseguito la firma.
 La base di una firma ad anello è un gruppo di potenziali firmatari, ciascuno con la propria coppia di chiavi univoche (chiavi pubbliche e private). Il firmatario stesso forma un “anello” con le chiavi pubbliche degli altri membri del gruppo. È uno strumento che protegge la privacy del mittente di una transazione rendendo le stesse indistinguibili da altre transazioni.
 
 \paragraph{Ring Confidential Transactions}
@@ -647,11 +645,11 @@ Prima della implementazione delle RingCT Monero necessitava che le sue transazio
 Ad esempio: una transazione di $ 12.5 $ Monero veniva divisa in 3 anelli di taglio: $ 10 $, $ 2 $ e $ 0.5 $ Monero. Questo sistema garantiva la presenza di numero elevato di membri nella transazione principale (triplicandone il numero) ma non garantiva la privacy dell'utente poichè un osservatore poteva facilmente leggere i valori delle transazioni. Per risolvere questo problema, Monero ha implementato le Ring Confidential Transactions (RingCT) ad inizio 2017. Questa tecnologia ha ricevuto in poco tempo un grande apprezzamento da parte della comunità di Monero tanto che nel Settembre 2017 è stata implementata in modo predefinito.
 
 Con RingCT, le nuove monete minate dalla community prima di entrare nel sistema venogno mascherate per poi essere inserite in una transazione RingCT. 
-Una delle caratteristiche chiave di RingCT è che avendo gli ammontari delle gtransazioni nascosti, è possibile scegliersi gli utenti che parteciperanno al anello della transazione rendendola, così, ancora più sicura.
+Una delle caratteristiche chiave di RingCT è che avendo gli ammontari delle transazioni nascosti, è possibile scegliersi gli utenti che parteciperanno all' anello della transazione rendendola, così, ancora più sicura.
 
 \paragraph{Esempio pratico di RingCT}
 
-Alice deve $ 2.50 $ Monero a Bob ed ha un portafoglio di $ 12.56 $ Monero. Poichè gli output del proprio portafoglio non possono essere spesi più volte, Alice dovrà creare una transazione che includa un output di $ 2.50 $ Monero per Bob e un output di $ 10.06 $ Monero per se stessa. Avremo quindi una situazione nella quale per Alice esite un input che descrive il valore del suo portafoglio ed un output che corrisponde al valore alla transazione. Per dimostrare che la transazione non sia frutto di un operazione malevola e che Alice abbia effettivamente i $ 12.56 $ Monero si andaranno a confrontare i valori dell'input e dell'output.
+Alice deve $ 2.50 $ Monero a Bob ed ha un portafoglio di $ 12.56 $ Monero. Poichè gli output del proprio portafoglio non possono essere spesi più volte, Alice dovrà creare una transazione che includa un output di $ 2.50 $ Monero per Bob e un output di $ 10.06 $ Monero per se stessa. Avremo quindi una situazione nella quale per Alice esite un input che descrive il valore del suo portafoglio ed un output che corrisponde al valore della transazione. Per dimostrare che la transazione non sia frutto di un operazione malevola e che Alice abbia effettivamente i $ 12.56 $ Monero si andaranno a confrontare i valori dell'input e dell'output.
 
 $$ \sum \text{input} = \sum \text{output} $$
 
@@ -659,12 +657,12 @@ A causa delle proprietà crittografiche delle RingCT:
 
 $$ \text{RingCT} = xG + aH(G) $$ 
 
-Alice dovrà andare a creare un Commitement per l'importo della transazione che in seguito i minatori andranno a verificare anche avendo a disposizione pochisse informazioni andando a verificare che l'ammontare del importo corrisponda al portafoglio di Alice.
+Alice dovrà andare a creare un Commitement per l'importo della transazione che in seguito i minatori andranno a verificare anche avendo a disposizione pochissime informazioni andando a verificare che l'ammontare dell' importo corrisponda al portafoglio di Alice.
 
 \paragraph{Range Proof}
 
 Questa tecnologia dimostra che il valore di un impegno è positivo e che non supera un certo limite. Questo è necessario per evitare che un utente possa creare un impegno negativo e creare monete dal nulla.
-Lo scopo di una Range Proof è dimostrare che si tratta di una transizione sicura e che si può proseguire con la accettazione della stessa.
+Lo scopo di una Range Proof è dimostrare che si tratta di una transizione sicura e che si può proseguire con l' accettazione della stessa.
 
 \begin{figure}[ht]
     \centering
@@ -682,7 +680,7 @@ $$ \downarrow $$
     \label{fig:summary}
 \end{figure}
 
-È l'insieme di tutte queste tecnolgie a rendere Monero una delle criptovaluta che tutelano maggiormente la privacy degli utenti e di conseguenza vengono preferite dai cybercriminali per il cryptojacking.
+È l'insieme di tutte queste tecnolgie a rendere Monero una delle criptovalute che tutelano maggiormente la privacy degli utenti e di conseguenza vengono preferite dai cybercriminali per il cryptojacking.
 
 \subsection{La blockchain di Monero}
 
@@ -735,7 +733,7 @@ Il funzionamento di RandomX è definito dai seguenti passaggi:
             RANDOMX_DATASET_BASE_SIZE + RANDOMX_DATASET_EXTRA_SIZE
         \end{verbatim}
 
-        e frazionata in frammetni di 64 byte che chiameremo \textit{items}.
+        e frazionata in frammenti di 64 byte che chiameremo \textit{items}.
         L'intero dataset è costruito partendo dalla chiave $k$ seguendo lo
         schema di seguito:
 
@@ -802,7 +800,7 @@ AES decrypt      AES encrypt      AES decrypt      AES encrypt
 
     \item si ripetono i punti 7 ed 8 per \textbf{RANDOMX\_PROGRAM\_COUNT} volte
     
-    \item si crea una impronta diitale dello Scrathpad:
+    \item si crea una impronta digitale dello Scrathpad:
     $A$=AesHash1R(Scrathpad)\footnote{Funzione di hash derivata da AES capace di
     produrre più di 10 bytes per clock}
 
@@ -833,7 +831,7 @@ Set Computer} e tutti i dati sono caricati in little-endian.
 
 \subsection{Vantaggi Economici}
 La popolarità è dovuta al potenziale guadagno, guadagno molto facile da crearsi
-poiché per definizoione il cryptojacking punta a sfruttare risorse in possesso
+poiché per definizione il cryptojacking punta a sfruttare risorse in possesso
 di altri in modo gratuito. Così, anche considerando la volatilità delle cripto
 valute, esempio principe BitCoin, i margini di guadagno sono abbastanza alti da
 rendere il crimine un vero e proprio business. 
@@ -867,7 +865,7 @@ Sarebbe una buona pratica proteggere i propri dispositivi con anti-malware
 capaci di rilevare processi di cryptomining in esecuzione in background, gestite
 le estensioni browser scaricate dagli utenti e minimizzare il rischio dato dalla
 esecuzione di script malevoli eseguiti sui browser. Nel caso si dovesse
-proteggere un organizzione, sarebbe buona pratica andare a equipaggiare software
+proteggere un organizzione, sarebbe buona pratica andare ad equipaggiare software
 del tipo sopracitato sia nei device endpoint che nei server.
 
 \subsubsection*{Applicare patch di sicurezza e proteggere i server}
@@ -930,7 +928,7 @@ sicurezza.
 A differenza di altre pratiche di sicurezza, come la risposta agli incidenti o i
 penetration test, il threat hunting parte dal presupposto che una minaccia sia
 già penetrata nel sistema. Gli esperti di threat hunting esaminano i dati per
-individuare indirizi di compromissione e tentativi di attacco, impiegando
+individuare indirizzi di compromissione e tentativi di attacco, impiegando
 tecniche di analisi comportamentale e informazioni derivate dall'intelligence
 sulle minacce.
 
@@ -961,14 +959,14 @@ accedere alla Shell di comando.
 
 \paragraph{Payload} Viene caricato nel container uno script \textbf{cronb.sh}
 che va a controllare lo stato del container ed eventualmente eseguire un secondo
-script \textbf{ar.sh}, il quale va sabatore completamente il container e
+script \textbf{ar.sh}, il quale va sabotare completamente il container e
 caricare un miner XMRRig\footnote{Un software di mining di Monero}. Un ultimo
-Payload è una serie di script che gli intrusi usano per puntare ad altri sisteme
+Payload è una serie di script che gli intrusi usano per puntare ad altri sistemi
 collegati alla rete del container.\cite{WatchDog}
 
 \subsection{Malware di cryptojacking all intero di istanzer Alibaba ECS}
 Come nel caso di Docker, anche in questo caso gli hacker hanno puntato alle
-sfrutture cloud, ma di Alibaba. I gruppi in question esembrerebbero essere
+strutture cloud, ma di Alibaba. I gruppi in question e sembrerebbero essere
 TeamTNT, Kinsing ed altri.
 
 I server Alibaba ECS\footnote{Elastic Compute Service} sono forniti con un
@@ -1005,7 +1003,7 @@ quale permetteva di eseguire codice da remoto) è stato rilevato un attacco ai
 sistemi VMware Horizon\footnote{Applicazione dekstop che permette di
 vitualizzare diverse piattaforme, particolarmente utilizzata nelle organizzioni
 che prevedono smart-working}, che utilizzavano questa libreria. L'attacco è
-stato fatto sffruttando una particolare risorsa di Log4J: Lightweight Directory
+stato fatto sfruttando una particolare risorsa di Log4J: Lightweight Directory
 Access Protocol che permetteva di creare una shell web dalla quale ci si poteva
 collegare da remoto.\cite{VMware}
 
@@ -1063,23 +1061,23 @@ Il quale decodificato:
 \paragraph{Payload} Sono stati rilevati diversi software di mining di Monero,
 tra questi troviamo z0Mibner, JavaX miner, varianti di XMRing, Jin bot e Minu
 bot. Vengono anche caricate delle backdoor\footnote{Interfaccia di rete che
-permette gli intrusi di acccedere alle macchine da remoto} come impianti Silver,
+permette agli intrusi di accedere alle macchine da remoto} come impianti Silver,
 agenti Atera, Splashtop Streamer e diverse reverse PowerShell.
 
 \subsection{Attacchi alla catena di fornitura tramite librerie npm}
 L'azienda produttrice di Sonatype\footnote{Antivirus} è riuscita a rilevare
 malware di cryptomining nascosti al interno di librerie npm\footnote{Node
 Package Manager, il gestore di pacchetti predefinito di Node.js}, le quali
-vengono usate in tutto il mondo. Uo dei pacchetti malevoli individuati è stato
+vengono usate in tutto il mondo. Uno dei pacchetti malevoli individuati è stato
 identificato come "ua-parser-js", questo pacchetto viene installato un numero di
 volte incredibilmente alto settimanalmente e così l'infezione è riuscita a
-propagarsi moltissimo orizontalmente.
+propagarsi moltissimo orizzontalmente.
 
 \subsection{Attacco brute force nelle macchine linux}
 Un gruppo di hacker nato in Romania ha attaccato le macchine Linux utilizzando
 un metodo brute force SSH, chiamato \textit{Diicot brute} per decifrare le
-password delle macchine con sistema operativo Linux. I crimanali avrebbero
-iniettato al interno di queste macchine software per mianare Monero, in oltre
+password delle macchine con sistema operativo Linux. I criminali avrebbero
+iniettato al interno di queste macchine software per mianare Monero, inoltre
 avrebbero collegato queste macchine a ben 2 botnet DDoS \footnote{Distributed
 Denial of Service}: la prima è \textit{DemonBot} e la seconda \textit{IRC Perl}.
 
@@ -1091,7 +1089,7 @@ individuata vanno a richiedere informazioni dal server che risponde con un
 sua versione e nel caso sia un server SSH potrebbe dare ulteriori dettagli sulla
 versione del software SSH in esecuzione. Una volta che gli hacker hanno trovato
 un accesso al server SSH, utilizzano un software di brute force per identificare
-credenziali valide per poi procedere con l'iniezzione del payload.
+credenziali valide per poi procedere con l'iniezione del payload.
 
 \paragraph{Payload} Gli hacker eseguono nella sessione SSH il seguente codice:
 
@@ -1105,19 +1103,19 @@ nella macchina.
 
 \subsection{Crypto farm nascoste in zone private}
 Il cryptojacking, anche se nella maggior parte delle volte è effettuato
-sfruttando le macchine delle vittime in alcuni casi può essere attutato andando
-a gravere solo sulle risorse energetiche della vittima. Non sono infatti rari i
+sfruttando le macchine delle vittime in alcuni casi può essere attuato andando
+a gravare solo sulle risorse energetiche della vittima. Non sono infatti rari i
 casi in cui i criminali installano delle farm più o meno grandi in edifici o
-stanze poco frequentati/e. Uno di questi è il casi è stato scoperto in Russia,
+stanze poco frequentati/e. Uno di questi è il caso scoperto in Russia,
 dove la polizia di Orenburg, investigando su un eccessivo consumo di corrente,
 denununciato dalla compagnia pubblica statale, ha scoperto un impianto di
 farming in un edificio abbandonato. L'impianto era alimentato da un
 allacciamento illegale ad una stazione di trasformazione poco lontana. Sono
-stati trovati scafali e scafali di potenti GPU, nel seguente
+stati trovati numerosi scafali di potenti GPU, nel seguente
 \href{https://youtu.be/aLTTRZJIvY4}{link} è possibile trovare un video della
 farm. Un altro caso noto è quello di un dipendente che scoprì una piccola farm
-in un magazzino della azienda per la quale lavora. Il dipendente notò un rumore
-strano provenire da una scatola su uno scafale, andandola ad aprire rivelò una
+in un magazzino dell' azienda per la quale lavora. Il dipendente notò un rumore
+strano provenire da una scatola su di uno scaffale, andandola ad aprire rivelò una
 serie di GPU in serie collegate alla rete aziendale che minavano criptovalute.
 Di seguito un'immagine.
 
